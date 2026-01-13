@@ -1,0 +1,618 @@
+/* ========================================
+   VARIÁVEIS CSS - Tema Neon Dark
+   ======================================== */
+:root {
+    /* Cores Neon */
+    --neon-cyan: #00f7ff;
+    --neon-purple: #b388ff;
+    --neon-pink: #ff4081;
+    --neon-green: #00ff88;
+    --neon-orange: #ff9800;
+    --neon-blue: #2196f3;
+    
+    /* Cores de Fundo */
+    --bg-dark: #0a0e27;
+    --bg-card: rgba(15, 23, 42, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Texto */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+}
+
+/* ========================================
+   RESET E ESTILOS GLOBAIS
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 247, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(179, 136, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 64, 129, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.app-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem;
+}
+
+/* ========================================
+   TÍTULOS E SUBTÍTULOS
+   ======================================== */
+.neon-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+    animation: fadeInDown 0.8s ease;
+}
+
+/* ========================================
+   CARDS PRINCIPAIS
+   ======================================== */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 247, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 12px 48px rgba(0, 247, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.hero-sales-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-sales-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(0, 247, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hero-sales-card:hover::before {
+    opacity: 1;
+}
+
+.hero-sales-card h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 30px rgba(0, 247, 255, 0.5);
+    margin: 0;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(0, 247, 255, 0.8);
+    }
+}
+
+/* ========================================
+   BARRA DE PROGRESSO (META)
+   ======================================== */
+.neon-progress {
+    width: 100%;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 247, 255, 0.3);
+    position: relative;
+}
+
+.neon-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 20px;
+    transition: width 1s ease-out;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.6);
+    animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(0, 247, 255, 0.8);
+    }
+}
+
+/* ========================================
+   KPIs INTEGRADOS
+   ======================================== */
+.integrated-kpis {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.integrated-kpi {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.integrated-kpi:hover {
+    background: rgba(0, 247, 255, 0.05);
+    border-color: var(--neon-cyan);
+    transform: translateY(-2px);
+}
+
+.integrated-kpi-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
+}
+
+.integrated-kpi-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.integrated-kpi-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   CARDS DE GRÁFICOS
+   ======================================== */
+.chart-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease;
+    height: 100%;
+}
+
+.chart-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 10px 40px rgba(0, 247, 255, 0.15);
+}
+
+.chart-header {
+    padding: 1.5rem;
+    background: rgba(0, 247, 255, 0.05);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.chart-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* ========================================
+   TABELA NEON
+   ======================================== */
+.neon-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.neon-table thead th {
+    background: rgba(0, 247, 255, 0.1);
+    color: var(--neon-cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--neon-cyan);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.neon-table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neon-table tbody tr:hover {
+    background: rgba(0, 247, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.neon-table tbody td {
+    padding: 0.75rem;
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+/* ========================================
+   RANKINGS
+   ======================================== */
+.compact-ranking {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    animation: fadeInRight 0.5s ease;
+}
+
+.ranking-item:hover {
+    transform: translateX(5px);
+    border-color: var(--neon-cyan);
+    background: rgba(0, 247, 255, 0.05);
+    box-shadow: 0 5px 20px rgba(0, 247, 255, 0.2);
+}
+
+.rank-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.ranking-photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-cyan);
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+}
+
+.ranking-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ranking-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vendor-stats {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.progress {
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    transition: width 0.6s ease;
+    height: 100%;
+}
+
+.progress-bar-striped {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 1rem 1rem;
+}
+
+.progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 1rem 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* ========================================
+   BALÃO FLUTUANTE DE VENDAS
+   ======================================== */
+.balao-vendas {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan));
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
+    z-index: 1000;
+    animation: float 3s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+}
+
+.titulo-vendas {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ========================================
+   COMPACT COMMERCIAL
+   ======================================== */
+.compact-commercial {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.compact-commercial:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 10px 40px rgba(0, 247, 255, 0.15);
+}
+
+.mini-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 5px 20px rgba(0, 247, 255, 0.3);
+}
+
+.info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   ANIMAÇÕES
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.app-footer {
+    padding: 1rem 2rem;
+    margin-top: 3rem;
+    font-size: 0.85rem;
+}
+
+.app-footer a {
+    transition: all 0.3s ease;
+}
+
+.app-footer a:hover {
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZADA
+   ======================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media (max-width: 992px) {
+    .hero-sales-card h1 {
+        font-size: 2rem;
+    }
+    
+    .integrated-kpis {
+        flex-direction: column;
+    }
+    
+    .balao-vendas {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-wrapper {
+        padding: 1rem 0.5rem;
+    }
+    
+    .neon-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .chart-card {
+        margin-bottom: 1rem;
+    }
+    
+    .ranking-item {
+        padding: 0.5rem;
+    }
+    
+    .ranking-photo {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* ========================================
+   UTILITÁRIOS
+   ======================================== */
+.text-center {
+    text-align: center;
+}
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+
+.mt-2 { margin-top: 0.5rem !important; }
+
+.d-flex { display: flex !important; }
+.justify-content-center { justify-content: center !important; }
+.align-items-center { align-items: center !important; }
+
+.w-100 { width: 100% !important; }

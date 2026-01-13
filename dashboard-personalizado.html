@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Solimões | Top Vendas</title>
+  <script>
+    (function enforceAuth() {
+      if (!sessionStorage.getItem('auth_token')) {
+        window.location.href = 'login.html';
+      }
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles-personalizado.css">
+  
+  <!-- CSS para seção única -->
+  <style>
+    .dashboard-unico {
+      min-height: auto !important;
+      height: auto !important;
+    }
+    .app-main {
+      scroll-snap-type: none !important;
+    }
+  </style>
+</head>
+
+<body class="neon-dark-theme layout-fixed sidebar-expand-lg">
+  <div class="app-wrapper">
+    <main class="app-main">
+
+      <!-- SEÇÃO 1: MEU DASHBOARD -->
+      <section class="dashboard-unico">
+        <div class="app-content">
+          <div class="container-fluid">
+            <!-- Header Principal -->
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h3 id="dashboard-principal" class="neon-subtitle mb-0">
+                  🚀 Projeto Solimões
+                  <!-- Substitua pela URL do seu logo -->
+                  <span style="font-size: 0.7rem; color: var(--neon-cyan); margin-left: 1rem;">Painel de Controle</span>
+                </h3>
+              </div>
+            </div>
+
+            <!-- Total Sales Section Integrada com KPIs -->
+            <div class="total-sales-section mb-2">
+              <div class="row">
+                <!-- Valor Principal Central COM KPIs INTEGRADOS -->
+                <div class="col-lg-6 col-md-12 mb-2">
+                  <div class="hero-sales-card glass-card">
+                    <div class="text-center">
+                      <h1 id="totalVendas">R$ 0,00</h1>
+                      <p class="neon-subtitle" style="font-size: 0.8rem; margin-top: 0.3rem;">Vendas Este Mês</p>
+                      <div style="margin-top: 0.5rem;">
+                        <div class="neon-progress">
+                          <div id="barraProgresso" class="neon-progress-bar" role="progressbar" style="width: 0%;">
+                            <span
+                              style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; color: white; font-size: 0.7rem;">0%</span>
+                          </div>
+                        </div>
+                        <small
+                          style="color: var(--text-secondary); margin-top: 0.3rem; display: block; font-weight: 500; font-size: 0.7rem;">Meta:
+                          R$ 100.000,00</small>
+                      </div>
+
+                      <!-- KPIs INTEGRADOS -->
+                      <div class="integrated-kpis">
+                        <div class="integrated-kpi">
+                          <div class="integrated-kpi-icon">
+                            <i class="bi bi-people-fill"></i>
+                          </div>
+                          <div class="integrated-kpi-data">
+                            <div class="integrated-kpi-value" id="quantidade_vendas">0</div>
+                            <div class="integrated-kpi-label">Quantidade Vendas</div>
+                          </div>
+                        </div>
+
+                        <div class="integrated-kpi">
+                          <div class="integrated-kpi-icon"
+                            style="background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan));">
+                            <i class="bi bi-cash-coin"></i>
+                          </div>
+                          <div class="integrated-kpi-data">
+                            <div class="integrated-kpi-value" id="ticket_medio">R$ 0,00</div>
+                            <div class="integrated-kpi-label">Ticket Médio</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Balão de Vendas do Dia (versão desktop) -->
+                <div class="col-lg-6 col-md-12 mb-2">
+                  <div class="hero-sales-card glass-card" style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 247, 255, 0.1));">
+                    <div class="text-center">
+                      <div class="titulo-vendas" style="font-size: 1rem; margin-bottom: 0.5rem;">💰 Vendas do Dia</div>
+                      <h1 id="totalVendas_desktop" style="font-size: 2.5rem; font-weight: 700; color: var(--neon-green);">R$ 0,00</h1>
+                      <p class="neon-subtitle" style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary);">Vendas realizadas hoje</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Layout Principal em Duas Colunas -->
+            <div class="row">
+              <!-- Coluna Esquerda - Gráficos e Vendas -->
+              <div class="col-lg-6">
+                <!-- Gráfico Vendas por Dia -->
+                <div class="chart-card mb-3">
+                  <div class="chart-header">
+                    <h4 class="chart-title">📊 Vendas por Dia</h4>
+                  </div>
+                  <div class="card-body" style="background: var(--glass-bg); padding: 1.5rem;">
+                    <canvas id="graficoVendasPorDia" style="height: 250px; width: 100%;"></canvas>
+                  </div>
+                </div>
+
+                <!-- Últimas Vendas -->
+                <div class="chart-card">
+                  <div class="chart-header" style="padding: 1rem;">
+                    <h6 class="chart-title mb-0" style="font-size: 0.9rem;">⚡ Últimas 10 Vendas</h6>
+                  </div>
+                  <div class="card-body p-1" style="background: var(--glass-bg); overflow-y: auto; max-height: 280px;">
+                    <table class="neon-table w-100" style="font-size: 0.75rem;">
+                      <thead>
+                        <tr style="height: 35px;">
+                          <th style="width: 12%; padding: 0.4rem 0.3rem;">Hora</th>
+                          <th style="width: 25%; padding: 0.4rem 0.3rem;">Cliente</th>
+                          <th style="width: 20%; padding: 0.4rem 0.3rem;">Produto</th>
+                          <th style="width: 18%; padding: 0.4rem 0.3rem;">Vendedor</th>
+                          <th style="width: 25%; padding: 0.4rem 0.3rem;">Valor</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tabelaUltimasVendas"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Coluna Direita - Rankings -->
+              <div class="col-lg-6">
+                <!-- Dashboard Comercial com Rankings Integrados -->
+                <div class="commercial-compact mb-3">
+                  <div class="compact-commercial" style="height: auto; padding: 1rem;">
+                    <!-- Header Principal -->
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                      <h4 class="neon-subtitle mb-0">🏢 Rankings de Vendedores</h4>
+                    </div>
+
+                    <!-- Rankings Integrados -->
+                    <div class="row" style="height: 580px;">
+                      <div class="col-6">
+                        <div class="compact-ranking"
+                          style="height: 100%; margin-bottom: 0; background: transparent; border: 1px solid rgba(0, 255, 255, 0.3);">
+                          <!-- Título com Valor Total Vendas -->
+                          <div class="text-center mb-3"
+                            style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); padding: 0.8rem; border-radius: 10px;">
+                            <h5 class="neon-subtitle mb-1" style="font-size: 0.8rem; color: white;">🏆 Ranking Geral</h5>
+                            <div class="info-value compact" id="total_vendas_ranking"
+                              style="font-size: 1.2rem; color: white; text-shadow: 0 0 15px white;">R$ 0,00</div>
+                            <div
+                              style="font-size: 0.6rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px;">
+                              Total do Mês</div>
+                          </div>
+                          <div id="ranking-container" class="ranking-list" style="height: calc(100% - 80px); overflow-y: auto;"></div>
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <div class="compact-ranking"
+                          style="height: 100%; margin-bottom: 0; background: transparent; border: 1px solid rgba(0, 255, 65, 0.3);">
+                          <!-- Título com Valor Vendas Hoje -->
+                          <div class="text-center mb-3"
+                            style="background: linear-gradient(135deg, var(--neon-green), var(--neon-orange)); padding: 0.8rem; border-radius: 10px;">
+                            <h5 class="neon-subtitle mb-1" style="font-size: 0.8rem; color: white;">🚀 Ranking Dia</h5>
+                            <div class="info-value compact" id="total_vendas_dia_ranking"
+                              style="font-size: 1.2rem; color: white; text-shadow: 0 0 15px white;">R$ 0,00</div>
+                            <div
+                              style="font-size: 0.6rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px;">
+                              Total Hoje</div>
+                          </div>
+                          <div id="ranking-container_dia" class="ranking-list" style="height: calc(100% - 80px); overflow-y: auto;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Floating Sales Balloon (versão mobile) -->
+  <div class="balao-vendas"
+    style="justify-content: center; padding: 0.6rem 1.2rem; min-width: 250px; max-width: 350px; border-radius: 40px;">
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="titulo-vendas">💰 Vendas do Dia</div>
+      <h1 id="totalVendas_hoje" style="font-size: 1.2rem; font-weight: 600;">R$ 0,00</h1>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer"
+    style="background: var(--glass-bg); backdrop-filter: blur(20px); border-top: 1px solid var(--glass-border); color: var(--text-secondary); margin-top: 2rem;">
+    <div class="float-end d-none d-sm-inline">Powered by Seu Nome</div>
+    <strong>Copyright &copy; 2024 <a href="#" style="color: var(--neon-cyan); text-decoration: none;">Meu Dashboard</a>.</strong>
+    Todos os direitos reservados.
+  </footer>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Script -->
+  <script src="script-com-banco.js"></script>
+</body>
+
+</html>

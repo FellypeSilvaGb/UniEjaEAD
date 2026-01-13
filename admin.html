@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Projeto Solimões | UniEja</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(20, 20, 40, 0.95);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #00ffff;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin: 0;
+        }
+        
+        .logo-text .subtitle {
+            font-size: 0.85rem;
+            color: #ff00ff;
+            font-weight: 600;
+        }
+        
+        .header-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-dashboard {
+            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-frontend {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-frontend:hover {
+            border-color: #00ffff;
+            color: #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .nav-tab {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #999;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .nav-tab:hover {
+            border-color: #00ffff;
+            color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(138, 43, 226, 0.2));
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(139, 0, 139, 0.2) 0%, rgba(75, 0, 130, 0.2) 100%);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff00ff;
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
+        }
+        
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card.vendas i { color: #00ffff; }
+        .stat-card.quantidade i { color: #ff00ff; }
+        .stat-card.clientes i { color: #00ff88; }
+        .stat-card.produtos i { color: #ffaa00; }
+        
+        .stat-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ffff;
+            margin: 0.5rem 0;
+            font-weight: 900;
+        }
+        
+        .stat-card p {
+            color: #999;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        /* Sections */
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Form Card */
+        .form-card {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        
+        .form-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .form-title i {
+            font-size: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .form-group input::placeholder {
+            color: #666;
+        }
+        
+        .form-group input[readonly] {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(138, 43, 226, 0.2));
+            border-color: #00ffff;
+            color: #00ffff;
+            font-weight: 700;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
+            color: #000;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(100, 100, 100, 0.3);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(100, 100, 100, 0.5);
+        }
+        
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(138, 43, 226, 0.2) 100%);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #00ffff;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #00ffff;
+        }
+        
+        tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+        
+        tbody tr {
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: rgba(0, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        /* Products Grid */
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .produto-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .produto-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ffff;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+        
+        .produto-card i {
+            font-size: 3rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+        
+        .produto-card h4 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .produto-card p {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .produto-card .preco {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff88;
+            font-weight: 900;
+        }
+        
+        /* Badge UniEja */
+        .unieja-badge {
+            background: linear-gradient(135deg, #ff00ff 0%, #8a2be2 100%);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #fff;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        /* Assistant Widget */
+        .assistant-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 2000;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .assistant-fab {
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #00ffff, #8a2be2);
+            color: #000;
+            padding: 0.85rem 1.5rem;
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.35);
+        }
+
+        .assistant-fab .fab-icon {
+            font-size: 1.25rem;
+        }
+
+        .assistant-panel {
+            position: absolute;
+            bottom: 4.5rem;
+            right: 0;
+            width: min(360px, 95vw);
+            background: rgba(5, 10, 25, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+
+        .assistant-panel.open {
+            display: flex;
+        }
+
+        .assistant-panel header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .assistant-panel header h4 {
+            margin-top: 0.35rem;
+        }
+
+        .assistant-close {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .assistant-messages {
+            max-height: 320px;
+            overflow-y: auto;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .assistant-message {
+            padding: 0.85rem 1rem;
+            border-radius: 15px;
+            line-height: 1.4;
+            display: inline-flex;
+            flex-direction: column;
+            max-width: 90%;
+            font-size: 0.95rem;
+        }
+
+        .assistant-message span {
+            margin-top: 0.35rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .assistant-message.bot {
+            background: rgba(0, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .assistant-message.user {
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            align-self: flex-end;
+        }
+
+        .assistant-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0 1.5rem 1rem;
+        }
+
+        .assistant-actions button {
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            padding: 0.4rem 0.95rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .assistant-actions button:hover {
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        .assistant-form {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .assistant-form input {
+            flex: 1;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            padding: 0.75rem 1.1rem;
+        }
+
+        .assistant-form button {
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, #00ffff, #8a2be2);
+            color: #000;
+            padding: 0.75rem 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .assistant-widget {
+                right: 1rem;
+                bottom: 1rem;
+            }
+            .assistant-panel {
+                right: 0;
+                left: 0;
+                margin: 0 auto;
+            }
+        }
+    </style>
+    <script>
+        (function () {
+            const storageKey = 'usuarioLogado';
+            const usuario = sessionStorage.getItem(storageKey) || localStorage.getItem(storageKey);
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <i class="bi bi-speedometer2"></i>
+            <div class="logo-text">
+                <h1>Projeto Solimões <span class="unieja-badge">UniEja</span></h1>
+                <div class="subtitle">Painel Administrativo | EJA Ensino Médio e Fundamental</div>
+            </div>
+        </div>
+            <div class="header-links">
+                <a class="btn-dashboard" id="btnDashboard" href="dashboard.html">
+                    <i class="bi bi-speedometer2"></i>
+                    Dashboard Tempo Real
+                </a>
+                <a class="btn-frontend" href="/">
+                    <i class="bi bi-arrow-return-left"></i>
+                    Voltar para o Frontend
+                </a>
+            </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="mudarAba('nova')">
+            <i class="bi bi-cart-plus"></i> Nova Venda
+        </button>
+        <button class="nav-tab" onclick="mudarAba('listar')">
+            <i class="bi bi-list-ul"></i> Listar Vendas
+        </button>
+        <button class="nav-tab" onclick="mudarAba('clientes')">
+            <i class="bi bi-people"></i> Clientes
+        </button>
+        <button class="nav-tab" onclick="mudarAba('produtos')">
+            <i class="bi bi-mortarboard"></i> Produtos UniEja
+        </button>
+        <button class="nav-tab" onclick="mudarAba('vendedores')">
+            <i class="bi bi-person-badge"></i> Vendedores
+        </button>
+        <button class="nav-tab" onclick="mudarAba('meta')">
+            <i class="bi bi-trophy"></i> Meta
+        </button>
+    </div>
+    
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card vendas">
+                <i class="bi bi-cash-coin"></i>
+                <h3 id="totalMes">R$ 0,00</h3>
+                <p>Total do Mês</p>
+            </div>
+            <div class="stat-card quantidade">
+                <i class="bi bi-cart-check"></i>
+                <h3 id="vendasMes">0</h3>
+                <p>Vendas do Mês</p>
+            </div>
+            <div class="stat-card clientes">
+                <i class="bi bi-people-fill"></i>
+                <h3 id="totalClientes">0</h3>
+                <p>Total Clientes</p>
+            </div>
+            <div class="stat-card produtos">
+                <i class="bi bi-mortarboard-fill"></i>
+                <h3 id="totalProdutos">8</h3>
+                <p>Cursos UniEja</p>
+            </div>
+        </div>
+        
+        <!-- Seção: Nova Venda -->
+        <div class="section active" id="section-nova">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-cart-plus"></i>
+                    Registrar Nova Venda - UniEja EJA
+                </h2>
+                <form id="formVenda">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nome do Aluno *</label>
+                            <input type="text" id="cliente" placeholder="Nome completo do aluno" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email do Aluno *</label>
+                            <input type="email" id="email" placeholder="aluno@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone do Aluno *</label>
+                            <input type="text" id="telefone" placeholder="(11) 98765-4321" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Curso UniEja *</label>
+                            <select id="produto" required>
+                                <option value="">Selecione o curso</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Consultor Responsável *</label>
+                            <select id="vendedor" required>
+                                <option value="">Selecione o consultor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor (R$) *</label>
+                            <input type="number" id="valor" placeholder="0,00" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Data/Hora da Matrícula</label>
+                            <input type="datetime-local" id="dataHora">
+                        </div>
+                        <div class="form-group">
+                            <label>Plataforma de Pagamento</label>
+                            <input type="text" value="Pagar.me" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Status do Pagamento</label>
+                            <select id="status">
+                                <option value="Aprovado">Aprovado</option>
+                                <option value="Pendente">Pendente</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Registrar Matrícula UniEja
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="limparForm()">
+                            <i class="bi bi-x-circle"></i> Limpar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Seção: Listar Vendas -->
+        <div class="section" id="section-listar">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-list-ul"></i>
+                    Todas as Matrículas UniEja
+                </h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Data/Hora</th>
+                                <th>Aluno</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Curso</th>
+                                <th>Consultor</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaVendas">
+                            <tr><td colspan="9" style="text-align: center; color: #666; padding: 2rem;">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Clientes -->
+        <div class="section" id="section-clientes">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-people"></i>
+                    Alunos Matriculados - UniEja
+                </h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Total Matrículas</th>
+                                <th>Total Investido</th>
+                                <th>Última Matrícula</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaClientes">
+                            <tr><td colspan="6" style="text-align: center; color: #666; padding: 2rem;">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Produtos -->
+        <div class="section" id="section-produtos">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-mortarboard"></i>
+                    Cursos Disponíveis - UniEja EJA
+                </h2>
+                <div class="produtos-grid" id="listaProdutos">
+                    <p style="text-align: center; color: #666;">Carregando cursos...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Vendedores -->
+        <div class="section" id="section-vendedores">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-person-badge"></i>
+                    Consultores UniEja
+                </h2>
+                <div class="produtos-grid" id="listaVendedores">
+                    <p style="text-align: center; color: #666;">Carregando consultores...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Meta -->
+        <div class="section" id="section-meta">
+            <div class="form-card">
+                <h2 class="form-title">
+                    <i class="bi bi-trophy"></i>
+                    Definir Meta Mensal - UniEja
+                </h2>
+                <form id="formMeta">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Meta Mensal de Matrículas (R$)</label>
+                            <input type="number" id="valorMeta" step="0.01" value="200000.00" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Atualizar Meta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <section class="assistant-widget" aria-live="polite">
+        <button class="assistant-fab" id="assistantToggle" aria-label="Abrir mentor do painel">
+            <span class="fab-icon">💬</span>
+            <span>Mentor UniEja</span>
+        </button>
+        <div class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false">
+            <header>
+                <div>
+                    <p style="color: #00ffff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;">Assistente em Plantão</p>
+                    <h4>Resumo rápido das matrículas</h4>
+                </div>
+                <button class="assistant-close" id="assistantClose" aria-label="Fechar mentor">×</button>
+            </header>
+            <div class="assistant-messages" id="assistantMessages">
+                <div class="assistant-message bot">
+                    <p>Oi! Posso trazer o resumo do dia, lembrar metas e orientar novas matrículas direto daqui do painel.</p>
+                    <span>Agora</span>
+                </div>
+            </div>
+            <div class="assistant-actions" id="assistantActions">
+                <button type="button" data-question="Quais matrículas foram registradas hoje?">Como estão as matrículas?</button>
+                <button type="button" data-question="Existe alguma bolsa ativa?">Tem bolsa ativa?</button>
+                <button type="button" data-question="Preciso fechar a meta do mês">Como bater a meta?</button>
+            </div>
+            <form class="assistant-form" id="assistantForm">
+                <input type="text" id="assistantInput" placeholder="Pergunte algo sobre o painel" autocomplete="off">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="admin.js"></script>
+</body>
+</html>

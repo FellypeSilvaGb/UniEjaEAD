@@ -1,0 +1,36 @@
+# Dependency directories
+node_modules/
+vendor/
+
+# Build and distribution artifacts
+dist/
+build/
+
+# Environment and secret configuration files
+.env
+.env.*
+config.php
+
+# Logs and runtime data
+logs/
+*.log
+*.cache
+
+# Database dumps and backups
+*.sql
+*.sqlite
+*.bak
+
+# IDE/editor configurations
+.vscode/
+.idea/
+*.code-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.swo

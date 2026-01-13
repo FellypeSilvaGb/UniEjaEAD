@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UniEJA • Escolha Seu Curso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-api="../api.php" data-login="../login.html" data-lead="../index.php" data-admin="../admin.html">
+    <div class="texture"></div>
+
+    <header class="site-header">
+        <div class="logo">UniEJA<span>Next</span></div>
+        <nav>
+            <a href="#cursos">Cursos</a>
+            <a href="#trajetoria">Trajetória</a>
+            <a href="#diferenciais">Diferenciais</a>
+        </nav>
+        <div class="header-actions">
+            <button class="ghost-btn">Fale com um mentor</button>
+            <a class="ghost-btn admin-link" href="../login.html" title="Acessar painel administrativo">
+                Área do consultor
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Nova jornada acadêmica</p>
+                <h1>Escolha o curso ideal e acelere seu futuro em meses, não anos.</h1>
+                <p class="lead">Combine ensino flexível com mentoria individual, certificações oficiais e trilhas pensadas para a realidade Amazônica.</p>
+                <div class="hero-ctas">
+                    <button class="primary-btn">Quero começar agora</button>
+                    <button class="secondary-btn">Explorar trilhas</button>
+                </div>
+                <p class="admin-note">Já faz parte do time? <a href="../login.html">Entrar no painel administrativo</a></p>
+                <ul class="hero-highlights">
+                    <li>
+                        <strong>+6.300</strong>
+                        <span>alunos certificados</span>
+                    </li>
+                    <li>
+                        <strong>96%</strong>
+                        <span>empregabilidade média</span>
+                    </li>
+                    <li>
+                        <strong>18</strong>
+                        <span>cursos ativos</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="hero-panel">
+                <p class="panel-title">Match de curso</p>
+                <h3>Responda 3 perguntas e receba uma trilha personalizada.</h3>
+                <ul>
+                    <li><span>1</span> Estilo de estudo preferido</li>
+                    <li><span>2</span> Objetivo profissional</li>
+                    <li><span>3</span> Tempo disponível por semana</li>
+                </ul>
+                <button class="primary-btn ghost">Começar diagnóstico</button>
+            </div>
+        </section>
+
+        <section id="cursos" class="courses">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Catálogo 2026</p>
+                    <h2>Escolha por área, formato ou ritmo.</h2>
+                </div>
+                <div class="filters">
+                    <div class="search-box">
+                        <span class="icon icon-search" aria-hidden="true"></span>
+                        <input type="text" id="searchInput" placeholder="Busque por nome, área ou habilidade" />
+                    </div>
+                    <div class="chip-group" id="filterChips">
+                        <button class="chip active" data-filter="todos">Todos</button>
+                        <button class="chip" data-filter="EJA">EJA</button>
+                        <button class="chip" data-filter="Tecnológico">Tecnológicos</button>
+                        <button class="chip" data-filter="Profissionalizante">Profissionalizantes</button>
+                        <button class="chip" data-filter="Saúde">Saúde</button>
+                        <button class="chip" data-filter="Tecnologia">Tecnologia</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-toolbar">
+                <div class="toggle-group">
+                    <button class="toggle active" data-mode="todos">Todos os formatos</button>
+                    <button class="toggle" data-mode="online">100% Online</button>
+                    <button class="toggle" data-mode="hibrido">Híbrido</button>
+                    <button class="toggle" data-mode="presencial">Presencial</button>
+                </div>
+                <div class="sort-group">
+                    <label for="sortSelect">Ordenar por</label>
+                    <select id="sortSelect">
+                        <option value="popularidade">Popularidade</option>
+                        <option value="duracao">Menor duração</option>
+                        <option value="investimento">Menor investimento</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="courseGrid" class="course-grid"></div>
+
+            <aside class="course-insight" id="courseInsight">
+                <p class="eyebrow">Resumo inteligente</p>
+                <h3>Nenhum curso selecionado ainda.</h3>
+                <p>Toque em um card para ver pré-requisitos, carga horária e benefícios exclusivos.</p>
+                <ul class="insight-list" id="insightList"></ul>
+                <button class="primary-btn" disabled>Quero garantir minha vaga</button>
+            </aside>
+        </section>
+
+        <section id="trajetoria" class="journey">
+            <div>
+                <p class="eyebrow">Roadmap do aluno</p>
+                <h2>Uma jornada guiada em quatro momentos.</h2>
+            </div>
+            <div class="journey-grid">
+                <article>
+                    <span>01</span>
+                    <h4>Descoberta</h4>
+                    <p>Mentor apresenta o plano ideal considerando tempo, foco profissional e experiências anteriores.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h4>Imersão</h4>
+                    <p>Aulas ao vivo, laboratórios remotos, kit de estudos e comunidade exclusiva.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h4>Portfólio</h4>
+                    <p>Projetos reais com empresas da região e feedback técnico validado.</p>
+                </article>
+                <article>
+                    <span>04</span>
+                    <h4>Lançamento</h4>
+                    <p>Career week com simulações de entrevistas, revisão de currículo e conexão com RHs parceiros.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="diferenciais" class="highlights">
+            <article>
+                <h3>Mentorias semanais</h3>
+                <p>Trilhas com checkpoints quinzenais para manter ritmo e ajustar objetivos pessoais.</p>
+            </article>
+            <article>
+                <h3>Certificação dupla</h3>
+                <p>Além do diploma reconhecido, cada curso entrega micro-certificados por competência.</p>
+            </article>
+            <article>
+                <h3>Experiência Amazônia</h3>
+                <p>Conteúdos alinhados às demandas tecnológicas e socioambientais da região Norte.</p>
+            </article>
+        </section>
+    </main>
+
+    <section class="assistant-widget" aria-live="polite">
+        <button class="assistant-fab" id="assistantToggle" aria-label="Abrir mentor virtual">
+            <span class="fab-icon">💬</span>
+            <span class="fab-label">Mentor</span>
+        </button>
+
+        <div class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false">
+            <header>
+                <div>
+                    <p class="eyebrow">Mentor UniEJA</p>
+                    <h4>Posso ajudar agora mesmo.</h4>
+                </div>
+                <button class="assistant-close" id="assistantClose" aria-label="Fechar mentor virtual">×</button>
+            </header>
+            <div class="assistant-messages" id="assistantMessages">
+                <div class="assistant-message bot">
+                    <p>Oi! Sou o guia rápido da UniEJA. Quer acelerar sua matrícula ou entender como está o desempenho das matrículas?</p>
+                    <span>Agora</span>
+                </div>
+            </div>
+            <div class="assistant-actions" id="assistantActions">
+                <button data-question="Quero terminar meu EJA rápido">Quero terminar meu EJA rápido</button>
+                <button data-question="Como estão as matrículas hoje?">Como estão as matrículas hoje?</button>
+                <button data-question="Me fale sobre bolsas">Possuo bolsas?</button>
+            </div>
+            <form class="assistant-form" id="assistantForm">
+                <input type="text" id="assistantInput" placeholder="Escreva sua pergunta" autocomplete="off" />
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
