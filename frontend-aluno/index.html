@@ -1,197 +1,986 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UniEJA • Escolha Seu Curso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniEja EAD - Conclua seus Estudos 100% Online</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* ===================== */
+        /* NAVBAR */
+        /* ===================== */
+        .navbar {
+            background: #1e3a8a;
+            padding: 1.25rem 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .logo-subtitle {
+            color: #eab308;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-matricular-nav {
+            background: #16a34a;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .btn-matricular-nav:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+        }
+        
+        /* ===================== */
+        /* BENEFITS BAR (TOPO) */
+        /* ===================== */
+        .benefits-bar {
+            background: linear-gradient(135deg, #eab308 0%, #fbbf24 100%);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+        }
+        
+        .benefits-bar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #1e3a8a;
+        }
+        
+        .benefit-item i {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .benefit-item span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+        
+        /* ===================== */
+        /* HERO SECTION */
+        /* ===================== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            background: #16a34a;
+            color: white;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            border-radius: 12px;
+            margin: 1.5rem 0 2rem;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+        }
+        
+        .btn-whatsapp-hero {
+            background: #25D366;
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-whatsapp-hero:hover {
+            background: #20ba5a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.6);
+        }
+        
+        .btn-whatsapp-hero i {
+            font-size: 2rem;
+        }
+        
+        /* ===================== */
+        /* VÍDEO SECTION */
+        /* ===================== */
+        .video-section {
+            padding: 4rem 2rem;
+            background: #f8fafc;
+        }
+        
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .video-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 3rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        
+        /* ===================== */
+        /* FAQ SECTION */
+        /* ===================== */
+        .faq-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: #3b82f6;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .faq-question:hover {
+            background: #eff6ff;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #64748b;
+            line-height: 1.7;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+            font-size: 1.3rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* ===================== */
+        /* BENEFÍCIOS SECTION */
+        /* ===================== */
+        .benefits-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 5rem 2rem;
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.25);
+        }
+        
+        .benefit-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .benefit-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        .benefit-text {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* ===================== */
+        /* TESTIMONIALS */
+        /* ===================== */
+        .testimonials-section {
+            background: white;
+            padding: 5rem 2rem;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .stars {
+            color: #eab308;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .author-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* ===================== */
+        /* CTA SECTION */
+        /* ===================== */
+        .cta-section {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+        
+        /* ===================== */
+        /* FOOTER */
+        /* ===================== */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-about h3 {
+            color: #eab308;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #eab308;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* ===================== */
+        /* WHATSAPP BUTTON */
+        /* ===================== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+            }
+            50% {
+                box-shadow: 0 5px 35px rgba(37, 211, 102, 0.8);
+            }
+        }
+        
+        /* ===================== */
+        /* RESPONSIVE */
+        /* ===================== */
+        @media (max-width: 768px) {
+            .benefits-bar-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            .benefit-item {
+                font-size: 0.85rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-matricular-nav {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
-<body data-api="../api.php" data-login="../login.html" data-lead="../index.php" data-admin="../admin.html">
-    <div class="texture"></div>
-
-    <header class="site-header">
-        <div class="logo">UniEJA<span>Next</span></div>
-        <nav>
-            <a href="#cursos">Cursos</a>
-            <a href="#trajetoria">Trajetória</a>
-            <a href="#diferenciais">Diferenciais</a>
-        </nav>
-        <div class="header-actions">
-            <button class="ghost-btn">Fale com um mentor</button>
-            <a class="ghost-btn admin-link" href="../login.html" title="Acessar painel administrativo">
-                Área do consultor
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    🎓
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">UniEja</span>
+                    <span class="logo-subtitle">EDUCAÇÃO EAD</span>
+                </div>
+            </div>
+            <a href="https://wa.me/5592999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20EJA%20da%20UniEja" 
+               target="_blank" 
+               class="btn-matricular-nav">
+                <i class="bi bi-whatsapp"></i>
+                Matricular-se
             </a>
         </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <p class="eyebrow">Nova jornada acadêmica</p>
-                <h1>Escolha o curso ideal e acelere seu futuro em meses, não anos.</h1>
-                <p class="lead">Combine ensino flexível com mentoria individual, certificações oficiais e trilhas pensadas para a realidade Amazônica.</p>
-                <div class="hero-ctas">
-                    <button class="primary-btn">Quero começar agora</button>
-                    <button class="secondary-btn">Explorar trilhas</button>
-                </div>
-                <p class="admin-note">Já faz parte do time? <a href="../login.html">Entrar no painel administrativo</a></p>
-                <ul class="hero-highlights">
-                    <li>
-                        <strong>+6.300</strong>
-                        <span>alunos certificados</span>
-                    </li>
-                    <li>
-                        <strong>96%</strong>
-                        <span>empregabilidade média</span>
-                    </li>
-                    <li>
-                        <strong>18</strong>
-                        <span>cursos ativos</span>
-                    </li>
-                </ul>
+    </nav>
+    
+    <!-- BENEFITS BAR -->
+    <div class="benefits-bar">
+        <div class="benefits-bar-container">
+            <div class="benefit-item">
+                <i class="bi bi-patch-check-fill"></i>
+                <span>Certificado Reconhecido pelo MEC</span>
             </div>
-            <div class="hero-panel">
-                <p class="panel-title">Match de curso</p>
-                <h3>Responda 3 perguntas e receba uma trilha personalizada.</h3>
-                <ul>
-                    <li><span>1</span> Estilo de estudo preferido</li>
-                    <li><span>2</span> Objetivo profissional</li>
-                    <li><span>3</span> Tempo disponível por semana</li>
-                </ul>
-                <button class="primary-btn ghost">Começar diagnóstico</button>
+            <div class="benefit-item">
+                <i class="bi bi-calendar-check"></i>
+                <span>Conclua em 3 Meses</span>
             </div>
-        </section>
-
-        <section id="cursos" class="courses">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Catálogo 2026</p>
-                    <h2>Escolha por área, formato ou ritmo.</h2>
-                </div>
-                <div class="filters">
-                    <div class="search-box">
-                        <span class="icon icon-search" aria-hidden="true"></span>
-                        <input type="text" id="searchInput" placeholder="Busque por nome, área ou habilidade" />
-                    </div>
-                    <div class="chip-group" id="filterChips">
-                        <button class="chip active" data-filter="todos">Todos</button>
-                        <button class="chip" data-filter="EJA">EJA</button>
-                        <button class="chip" data-filter="Tecnológico">Tecnológicos</button>
-                        <button class="chip" data-filter="Profissionalizante">Profissionalizantes</button>
-                        <button class="chip" data-filter="Saúde">Saúde</button>
-                        <button class="chip" data-filter="Tecnologia">Tecnologia</button>
-                    </div>
-                </div>
+            <div class="benefit-item">
+                <i class="bi bi-laptop"></i>
+                <span>100% Online</span>
             </div>
-
-            <div class="course-toolbar">
-                <div class="toggle-group">
-                    <button class="toggle active" data-mode="todos">Todos os formatos</button>
-                    <button class="toggle" data-mode="online">100% Online</button>
-                    <button class="toggle" data-mode="hibrido">Híbrido</button>
-                    <button class="toggle" data-mode="presencial">Presencial</button>
-                </div>
-                <div class="sort-group">
-                    <label for="sortSelect">Ordenar por</label>
-                    <select id="sortSelect">
-                        <option value="popularidade">Popularidade</option>
-                        <option value="duracao">Menor duração</option>
-                        <option value="investimento">Menor investimento</option>
-                    </select>
-                </div>
+            <div class="benefit-item">
+                <i class="bi bi-clock-fill"></i>
+                <span>Estude no Seu Ritmo</span>
             </div>
-
-            <div id="courseGrid" class="course-grid"></div>
-
-            <aside class="course-insight" id="courseInsight">
-                <p class="eyebrow">Resumo inteligente</p>
-                <h3>Nenhum curso selecionado ainda.</h3>
-                <p>Toque em um card para ver pré-requisitos, carga horária e benefícios exclusivos.</p>
-                <ul class="insight-list" id="insightList"></ul>
-                <button class="primary-btn" disabled>Quero garantir minha vaga</button>
-            </aside>
-        </section>
-
-        <section id="trajetoria" class="journey">
-            <div>
-                <p class="eyebrow">Roadmap do aluno</p>
-                <h2>Uma jornada guiada em quatro momentos.</h2>
-            </div>
-            <div class="journey-grid">
-                <article>
-                    <span>01</span>
-                    <h4>Descoberta</h4>
-                    <p>Mentor apresenta o plano ideal considerando tempo, foco profissional e experiências anteriores.</p>
-                </article>
-                <article>
-                    <span>02</span>
-                    <h4>Imersão</h4>
-                    <p>Aulas ao vivo, laboratórios remotos, kit de estudos e comunidade exclusiva.</p>
-                </article>
-                <article>
-                    <span>03</span>
-                    <h4>Portfólio</h4>
-                    <p>Projetos reais com empresas da região e feedback técnico validado.</p>
-                </article>
-                <article>
-                    <span>04</span>
-                    <h4>Lançamento</h4>
-                    <p>Career week com simulações de entrevistas, revisão de currículo e conexão com RHs parceiros.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="diferenciais" class="highlights">
-            <article>
-                <h3>Mentorias semanais</h3>
-                <p>Trilhas com checkpoints quinzenais para manter ritmo e ajustar objetivos pessoais.</p>
-            </article>
-            <article>
-                <h3>Certificação dupla</h3>
-                <p>Além do diploma reconhecido, cada curso entrega micro-certificados por competência.</p>
-            </article>
-            <article>
-                <h3>Experiência Amazônia</h3>
-                <p>Conteúdos alinhados às demandas tecnológicas e socioambientais da região Norte.</p>
-            </article>
-        </section>
-    </main>
-
-    <section class="assistant-widget" aria-live="polite">
-        <button class="assistant-fab" id="assistantToggle" aria-label="Abrir mentor virtual">
-            <span class="fab-icon">💬</span>
-            <span class="fab-label">Mentor</span>
-        </button>
-
-        <div class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false">
-            <header>
-                <div>
-                    <p class="eyebrow">Mentor UniEJA</p>
-                    <h4>Posso ajudar agora mesmo.</h4>
-                </div>
-                <button class="assistant-close" id="assistantClose" aria-label="Fechar mentor virtual">×</button>
-            </header>
-            <div class="assistant-messages" id="assistantMessages">
-                <div class="assistant-message bot">
-                    <p>Oi! Sou o guia rápido da UniEJA. Quer acelerar sua matrícula ou entender como está o desempenho das matrículas?</p>
-                    <span>Agora</span>
-                </div>
-            </div>
-            <div class="assistant-actions" id="assistantActions">
-                <button data-question="Quero terminar meu EJA rápido">Quero terminar meu EJA rápido</button>
-                <button data-question="Como estão as matrículas hoje?">Como estão as matrículas hoje?</button>
-                <button data-question="Me fale sobre bolsas">Possuo bolsas?</button>
-            </div>
-            <form class="assistant-form" id="assistantForm">
-                <input type="text" id="assistantInput" placeholder="Escreva sua pergunta" autocomplete="off" />
-                <button type="submit">Enviar</button>
-            </form>
+        </div>
+    </div>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>CONCLUA SEUS ESTUDOS<br>100% ONLINE</h1>
+            <div class="hero-subtitle">EM APENAS 3 MESES</div>
+            <p class="hero-description">
+                Certificado reconhecido pelo MEC válido em todo Brasil.<br>
+                Material completo em PDF + Aulas Online + Suporte Pedagógico.<br>
+                Sua aprovação está garantida!
+            </p>
+            <a href="https://wa.me/5592999999999?text=Olá!%20Quero%20me%20matricular%20no%20EJA!" 
+               target="_blank" 
+               class="btn-whatsapp-hero">
+                <i class="bi bi-whatsapp"></i>
+                Falar com Consultor
+            </a>
         </div>
     </section>
-
-    <script src="app.js" type="module"></script>
+    
+    <!-- VÍDEO SECTION -->
+    <section class="video-section" id="video">
+        <div class="video-container">
+            <h2 class="video-title">Como Funciona o UniEja EAD?</h2>
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Como funciona o UniEja EAD"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <div class="faq-container">
+            <h2 class="section-title">Dúvidas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>O certificado é reconhecido pelo MEC?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Sim! Nosso certificado é 100% reconhecido pelo Ministério da Educação (MEC) e tem validade em todo território nacional. Você pode usá-lo para ingressar no mercado de trabalho, fazer concursos públicos, faculdade ou continuar seus estudos.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Quanto tempo leva para concluir?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    O Ensino Fundamental pode ser concluído em até 3 meses, e o pacote completo (Fundamental + Médio) em até 6 meses. Você estuda no seu próprio ritmo, sem pressão!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Como funciona o pagamento?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Aceitamos PIX, cartão de crédito (parcelado) e boleto bancário. Entre em contato pelo WhatsApp e nosso consultor vai te passar todas as condições e descontos disponíveis!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Preciso ir presencialmente em algum momento?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Não! Todo o processo é 100% online, desde as aulas até a emissão do certificado. Você estuda quando e onde quiser, pelo celular, tablet ou computador.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>O que está incluso no curso?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Material didático completo em PDF, videoaulas, sala de aula virtual, suporte pedagógico, certificado digital e toda documentação necessária. Tudo isso sem custo adicional!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Como faço para me matricular?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    É muito fácil! Clique no botão "Falar com Consultor" e converse com nossa equipe pelo WhatsApp. Vamos te explicar tudo e te ajudar com a matrícula em poucos minutos!
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BENEFÍCIOS SECTION -->
+    <section class="benefits-section" id="beneficios">
+        <div class="benefits-container">
+            <h2 class="section-title">Benefícios UniEja EAD</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </div>
+                    <h3 class="benefit-title">Certificado MEC</h3>
+                    <p class="benefit-text">Válido em todo Brasil</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </div>
+                    <h3 class="benefit-title">Material em PDF</h3>
+                    <p class="benefit-text">Acesse de qualquer lugar</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+                    <h3 class="benefit-title">Aula Virtual</h3>
+                    <p class="benefit-text">Plataforma completa</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h3 class="benefit-title">45 Dias</h3>
+                    <p class="benefit-text">Receba seu certificado</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-file-text-fill"></i>
+                    </div>
+                    <h3 class="benefit-title">Documentação</h3>
+                    <p class="benefit-text">Tudo incluso</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="testimonials-container">
+            <h2 class="section-title">O Que Nossos Alunos Pensam</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Consegui concluir meus estudos enquanto trabalhava. O material é excelente e o suporte sempre disponível para ajudar! Recomendo muito!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Maria Clara</h4>
+                            <p>Concluiu em 3 meses</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Pela primeira vez consegui estudar no meu ritmo. A plataforma é muito intuitiva e o certificado chegou rapidamente. Valeu muito a pena!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JS</div>
+                        <div class="author-info">
+                            <h4>João Silva</h4>
+                            <p>Aluno desde 2024</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Finalmente consegui o certificado do ensino médio. Agora posso fazer concurso público e mudar de vida. Muito obrigada UniEja!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Paula</h4>
+                            <p>Concluiu em 5 meses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Pronto para Mudar sua Vida?</h2>
+            <p>Fale agora com um consultor e garanta sua matrícula com desconto!</p>
+            <a href="https://wa.me/5592999999999?text=Olá!%20Quero%20me%20matricular%20no%20UniEja!" 
+               target="_blank" 
+               class="btn-whatsapp-hero">
+                <i class="bi bi-whatsapp"></i>
+                Falar com Consultor Agora
+            </a>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>UniEja EAD</h3>
+                <p>Educação de qualidade ao alcance de todos. Conclua seus estudos 100% online com certificado reconhecido pelo MEC.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Institucional</h4>
+                <ul class="footer-links">
+                    <li><a href="#video">Como Funciona</a></li>
+                    <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:contato@unieja.com.br">contato@unieja.com.br</a></li>
+                    <li><a href="https://wa.me/5592999999999" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 UniEja EAD. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- WHATSAPP FLOAT BUTTON -->
+    <a href="https://wa.me/5592999999999?text=Olá!%20Vim%20do%20site%20e%20gostaria%20de%20mais%20informações" 
+       target="_blank" 
+       class="whatsapp-float"
+       title="Fale conosco no WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Fechar todos
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Abrir o clicado (se não estava aberto)
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
