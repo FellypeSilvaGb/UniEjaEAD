@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Matrícula - UniEja EAD</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Finalize sua matrícula nos cursos EJA da UniEja. Ensino Fundamental e Médio 100% online com certificado MEC.">
+    <meta name="keywords" content="matrícula EJA, pagamento curso, certificado MEC, ensino online, checkout">
+    <meta name="author" content="UniEja EAD">
+    <meta property="og:title" content="Finalizar Matrícula - UniEja EAD">
+    <meta property="og:description" content="Finalize sua matrícula e comece seus estudos hoje mesmo!">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            color: #eab308;
+        }
+        
+        .header-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+        
+        .form-section, .summary-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-title i {
+            color: #eab308;
+        }
+        
+        /* FORMULÁRIO */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        /* OPÇÕES DE PAGAMENTO */
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-option {
+            position: relative;
+        }
+        
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .payment-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .payment-label:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+        
+        .payment-option input:checked + .payment-label {
+            border-color: #16a34a;
+            background: #f0fdf4;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2);
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+        }
+        
+        .payment-name {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.9rem;
+        }
+        
+        /* CAMPOS DE CARTÃO */
+        .credit-card-fields {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        
+        .credit-card-fields.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card-display {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .card-number-display {
+            font-size: 1.5rem;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+        }
+        
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .card-holder, .card-expiry {
+            font-size: 0.9rem;
+        }
+        
+        .card-label {
+            opacity: 0.7;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* PIX */
+        .pix-section {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s;
+        }
+        
+        .pix-section.active {
+            display: block;
+        }
+        
+        .pix-qrcode {
+            width: 250px;
+            height: 250px;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #16a34a;
+            overflow: hidden;
+        }
+        
+        .pix-qrcode img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .pix-code {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #1e3a8a;
+            word-break: break-all;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .btn-copy {
+            background: #eab308;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-copy:hover {
+            background: #fbbf24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+        }
+        
+        .btn-copy.copied {
+            background: #16a34a;
+        }
+        
+        /* BOLETO */
+        .boleto-section {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s;
+        }
+        
+        .boleto-section.active {
+            display: block;
+        }
+        
+        .boleto-code {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #1e3a8a;
+            word-break: break-all;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .boleto-info {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        
+        .boleto-info p {
+            margin: 0.5rem 0;
+            color: #15803d;
+            font-size: 0.9rem;
+        }
+        
+        /* RESUMO */
+        .course-summary {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .course-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-desc {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .price-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .price-row.total {
+            border-top: 2px solid #e2e8f0;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
+        
+        .security-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f0fdf4;
+            border-radius: 8px;
+            color: #15803d;
+            font-size: 0.85rem;
+        }
+        
+        .badge i {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-submit:hover {
+            background: #15803d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(22, 163, 74, 0.3);
+        }
+        
+        .btn-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn-back:hover {
+            color: #1e3a8a;
+        }
+        
+        /* LOADING */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* VALIDAÇÃO */
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .form-group.error input {
+            border-color: #ef4444;
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        /* CONFIRMAÇÃO */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .confirmation-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        .confirmation-icon {
+            font-size: 4rem;
+            color: #16a34a;
+            margin-bottom: 1.5rem;
+        }
+        
+        .confirmation-content h2 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+        
+        .confirmation-content p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .confirmation-details {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .detail-label {
+            color: #64748b;
+        }
+        
+        .detail-value {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+        
+        .btn-confirm {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-confirm:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+        
+        /* WHATSAPP BUTTON */
+        .whatsapp-button-checkout {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9998;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-button-checkout:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .form-section, .summary-section {
+                padding: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .confirmation-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .pix-qrcode {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .pix-qrcode {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .whatsapp-button-checkout {
+                bottom: 1rem;
+                left: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WHATSAPP BUTTON -->
+    <a href="https://wa.me/5511999999999?text=Olá!%20Estou%20com%20dúvidas%20na%20matrícula%20da%20UniEja%20EAD" 
+       target="_blank" 
+       class="whatsapp-button-checkout">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <div class="checkout-container">
+        <a href="index.html" class="btn-back">
+            <i class="bi bi-arrow-left"></i>
+            Voltar para cursos
+        </a>
+        
+        <div class="header">
+            <div class="logo">
+                <i class="bi bi-mortarboard-fill"></i>
+                <span>UniEja EAD</span>
+            </div>
+            <p class="header-subtitle">Finalize sua matrícula</p>
+        </div>
+        
+        <div class="checkout-grid">
+            <!-- FORMULÁRIO -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-person-circle"></i>
+                    Dados Pessoais
+                </h2>
+                
+                <form id="checkoutForm" novalidate>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" required placeholder="João da Silva">
+                        <div class="error-message">Por favor, insira seu nome completo</div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                            <div class="error-message">Por favor, insira um email válido</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone *</label>
+                            <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                            <div class="error-message">Por favor, insira um telefone válido</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
+                            <div class="error-message">Por favor, insira um CPF válido</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nascimento">Data de Nascimento *</label>
+                            <input type="date" id="nascimento" name="nascimento" required>
+                            <div class="error-message">Por favor, insira sua data de nascimento</div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="section-title" style="margin-top: 2rem;">
+                        <i class="bi bi-credit-card"></i>
+                        Forma de Pagamento
+                    </h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" name="pagamento" value="cartao" id="pagamento-cartao" checked>
+                                <label for="pagamento-cartao" class="payment-label">
+                                    <i class="bi bi-credit-card payment-icon" style="color: #3b82f6;"></i>
+                                    <span class="payment-name">Cartão de Crédito</span>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" name="pagamento" value="pix" id="pagamento-pix">
+                                <label for="pagamento-pix" class="payment-label">
+                                    <i class="bi bi-qr-code payment-icon" style="color: #16a34a;"></i>
+                                    <span class="payment-name">PIX</span>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" name="pagamento" value="boleto" id="pagamento-boleto">
+                                <label for="pagamento-boleto" class="payment-label">
+                                    <i class="bi bi-upc-scan payment-icon" style="color: #eab308;"></i>
+                                    <span class="payment-name">Boleto</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CAMPOS DE CARTÃO -->
+                    <div class="credit-card-fields active" id="cartaoFields">
+                        <div class="card-display">
+                            <div class="card-number-display" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                            <div class="card-info">
+                                <div class="card-holder">
+                                    <div class="card-label">Nome no Cartão</div>
+                                    <div id="cardHolderDisplay">NOME COMPLETO</div>
+                                </div>
+                                <div class="card-expiry">
+                                    <div class="card-label">Validade</div>
+                                    <div id="cardExpiryDisplay">MM/AA</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Número do Cartão *</label>
+                            <input type="text" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000">
+                            <div class="error-message">Número do cartão inválido</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Nome no Cartão *</label>
+                            <input type="text" id="cardName" placeholder="NOME COMO NO CARTÃO">
+                            <div class="error-message">Por favor, insira o nome como está no cartão</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Validade *</label>
+                                <input type="text" id="cardExpiry" maxlength="5" placeholder="MM/AA">
+                                <div class="error-message">Data de validade inválida</div>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV *</label>
+                                <input type="text" id="cardCvv" maxlength="4" placeholder="123">
+                                <div class="error-message">CVV inválido</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PIX -->
+                    <div class="pix-section" id="pixSection">
+                        <p style="color: #64748b; margin-bottom: 1rem;">
+                            Escaneie o QR Code abaixo ou copie o código PIX para realizar o pagamento
+                        </p>
+                        <div class="pix-qrcode" id="pixQrCode">
+                            <i class="bi bi-qr-code"></i>
+                        </div>
+                        <div class="pix-code" id="pixCode">
+                            Carregando código PIX...
+                        </div>
+                        <button type="button" class="btn-copy" onclick="copiarPix()" id="copyPixButton">
+                            <i class="bi bi-clipboard"></i>
+                            Copiar Código PIX
+                        </button>
+                        <div class="boleto-info" style="margin-top: 1.5rem;">
+                            <p><i class="bi bi-info-circle"></i> Após o pagamento, seu acesso será liberado em até 5 minutos</p>
+                            <p><i class="bi bi-clock"></i> Código válido por 24 horas</p>
+                        </div>
+                    </div>
+                    
+                    <!-- BOLETO -->
+                    <div class="boleto-section" id="boletoSection">
+                        <p style="color: #64748b; margin-bottom: 1rem;">
+                            Copie o código de barras abaixo para pagamento ou imprima o boleto
+                        </p>
+                        <div class="boleto-code" id="boletoCode">
+                            Carregando código de barras...
+                        </div>
+                        <button type="button" class="btn-copy" onclick="copiarBoleto()" id="copyBoletoButton">
+                            <i class="bi bi-clipboard"></i>
+                            Copiar Código de Barras
+                        </button>
+                        <div class="boleto-info">
+                            <p><i class="bi bi-calendar"></i> Vencimento: <span id="boletoDueDate">Carregando...</span></p>
+                            <p><i class="bi bi-cash"></i> Valor: <span id="boletoValue">Carregando...</span></p>
+                            <p><i class="bi bi-info-circle"></i> Após o pagamento, acesso liberado em 1-2 dias úteis</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- RESUMO -->
+            <div class="summary-section">
+                <h2 class="section-title">
+                    <i class="bi bi-cart-check"></i>
+                    Resumo do Pedido
+                </h2>
+                
+                <div class="course-summary">
+                    <div class="course-name" id="cursoNome">Carregando...</div>
+                    <div class="course-desc" id="cursoDesc">...</div>
+                    
+                    <div class="price-details">
+                        <div class="price-row">
+                            <span>Curso</span>
+                            <span id="cursoValor">R$ 0,00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Material Didático</span>
+                            <span style="color: #16a34a;">Grátis</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Plataforma Online</span>
+                            <span style="color: #16a34a;">Grátis</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Certificado Digital</span>
+                            <span style="color: #16a34a;">Grátis</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total</span>
+                            <span id="valorTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="security-badges">
+                    <div class="badge">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Pagamento 100% seguro com criptografia</span>
+                    </div>
+                    <div class="badge">
+                        <i class="bi bi-patch-check"></i>
+                        <span>Certificado reconhecido pelo MEC</span>
+                    </div>
+                    <div class="badge">
+                        <i class="bi bi-lightning-charge"></i>
+                        <span>Acesso imediato após confirmação</span>
+                    </div>
+                    <div class="badge">
+                        <i class="bi bi-headset"></i>
+                        <span>Suporte 7 dias por semana</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit" onclick="iniciarProcessamento()" id="submitButton">
+                    <i class="bi bi-check-circle"></i>
+                    Finalizar Matrícula
+                </button>
+                
+                <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 1rem;">
+                    <i class="bi bi-lock"></i> Seus dados estão protegidos e não serão compartilhados
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <div class="confirmation-icon">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h2>Matrícula Realizada com Sucesso!</h2>
+            <p>Parabéns! Sua matrícula foi confirmada e você já pode começar seus estudos.</p>
+            
+            <div class="confirmation-details">
+                <div class="detail-item">
+                    <span class="detail-label">Curso:</span>
+                    <span class="detail-value" id="confirmationCourse">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Valor:</span>
+                    <span class="detail-value" id="confirmationValue">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Forma de Pagamento:</span>
+                    <span class="detail-value" id="confirmationPayment">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Código da Matrícula:</span>
+                    <span class="detail-value" id="confirmationCode">-</span>
+                </div>
+            </div>
+            
+            <p style="color: #16a34a; font-weight: 600; margin-bottom: 1.5rem;">
+                <i class="bi bi-envelope-check"></i> Você receberá um email com os dados de acesso
+            </p>
+            
+            <button class="btn-confirm" onclick="redirecionarParaAreaAluno()">
+                <i class="bi bi-rocket-takeoff"></i>
+                Ir para Área do Aluno
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Constantes e configurações
+        const CONFIG = {
+            whatsappNumber: '5511999999999',
+            emailSupport: 'suporte@unieja.com.br',
+            apiUrl: 'https://api.unieja.com.br',
+            siteUrl: 'https://unieja.com.br'
+        };
+        
+        // Estado da aplicação
+        let state = {
+            curso: null,
+            dadosPessoais: {},
+            pagamento: {
+                metodo: 'cartao',
+                status: 'pendente',
+                transacaoId: null
+            },
+            matriculaId: null
+        };
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarCurso();
+            configurarMascaras();
+            configurarValidacoes();
+            configurarPagamento();
+            atualizarQRCodePIX();
+            gerarBoleto();
+        });
+        
+        // Carregar dados do curso do localStorage
+        function carregarCurso() {
+            const cursoData = JSON.parse(localStorage.getItem('cursoSelecionado') || '{}');
+            
+            if (!cursoData.nome) {
+                alert('Nenhum curso selecionado! Redirecionando para a página inicial...');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            state.curso = cursoData;
+            
+            // Atualizar interface
+            document.getElementById('cursoNome').textContent = cursoData.nome;
+            document.getElementById('cursoDesc').textContent = cursoData.descricao;
+            document.getElementById('cursoValor').textContent = formatarMoeda(cursoData.valor);
+            document.getElementById('valorTotal').textContent = formatarMoeda(cursoData.valor);
+            
+            // Atualizar confirmação
+            document.getElementById('confirmationCourse').textContent = cursoData.nome;
+            document.getElementById('confirmationValue').textContent = formatarMoeda(cursoData.valor);
+        }
+        
+        // Configurar máscaras nos campos
+        function configurarMascaras() {
+            // Máscara para CPF
+            const cpfInput = document.getElementById('cpf');
+            cpfInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                
+                if (value.length <= 11) {
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2')
+                                .replace(/(\d{3})(\d)/, '$1.$2')
+                                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                }
+                e.target.value = value;
+            });
+            
+            // Máscara para telefone
+            const telInput = document.getElementById('telefone');
+            telInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                
+                if (value.length > 10) {
+                    value = value.replace(/^(\d{2})(\d)/, '($1) $2')
+                                .replace(/(\d{5})(\d)/, '$1-$2');
+                } else if (value.length > 6) {
+                    value = value.replace(/^(\d{2})(\d)/, '($1) $2')
+                                .replace(/(\d{4})(\d)/, '$1-$2');
+                } else if (value.length > 2) {
+                    value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+                }
+                e.target.value = value;
+            });
+            
+            // Preview do cartão
+            document.getElementById('cardNumber')?.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '');
+                let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+                e.target.value = formatted;
+                document.getElementById('cardNumberDisplay').textContent = formatted || '•••• •••• •••• ••••';
+            });
+            
+            document.getElementById('cardName')?.addEventListener('input', (e) => {
+                document.getElementById('cardHolderDisplay').textContent = e.target.value.toUpperCase() || 'NOME COMPLETO';
+            });
+            
+            document.getElementById('cardExpiry')?.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+                e.target.value = value;
+                document.getElementById('cardExpiryDisplay').textContent = value || 'MM/AA';
+            });
+            
+            // Máscara para CVV
+            document.getElementById('cardCvv')?.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+            });
+        }
+        
+        // Configurar validações
+        function configurarValidacoes() {
+            const form = document.getElementById('checkoutForm');
+            const inputs = form.querySelectorAll('input[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => validarCampo(input));
+                input.addEventListener('input', () => removerErro(input));
+            });
+        }
+        
+        function validarCampo(input) {
+            const value = input.value.trim();
+            const formGroup = input.closest('.form-group');
+            
+            // Remover erro anterior
+            removerErro(input);
+            
+            // Validações específicas
+            if (input.id === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    mostrarErro(input, 'Por favor, insira um email válido');
+                    return false;
+                }
+            }
+            
+            if (input.id === 'cpf' && value) {
+                const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+                if (!cpfRegex.test(value)) {
+                    mostrarErro(input, 'Por favor, insira um CPF válido');
+                    return false;
+                }
+            }
+            
+            if (input.id === 'telefone' && value) {
+                const telRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+                if (!telRegex.test(value)) {
+                    mostrarErro(input, 'Por favor, insira um telefone válido');
+                    return false;
+                }
+            }
+            
+            if (input.id === 'cardNumber' && value) {
+                const cardNumber = value.replace(/\s/g, '');
+                if (cardNumber.length < 16) {
+                    mostrarErro(input, 'Número do cartão deve ter 16 dígitos');
+                    return false;
+                }
+            }
+            
+            if (input.id === 'cardExpiry' && value) {
+                const [month, year] = value.split('/');
+                const currentYear = new Date().getFullYear() % 100;
+                const currentMonth = new Date().getMonth() + 1;
+                
+                if (!month || !year || month < 1 || month > 12 || 
+                    year < currentYear || (year == currentYear && month < currentMonth)) {
+                    mostrarErro(input, 'Data de validade inválida ou expirada');
+                    return false;
+                }
+            }
+            
+            if (input.id === 'cardCvv' && value) {
+                if (value.length < 3) {
+                    mostrarErro(input, 'CVV deve ter 3 ou 4 dígitos');
+                    return false;
+                }
+            }
+            
+            // Validação básica de required
+            if (input.hasAttribute('required') && !value) {
+                mostrarErro(input, 'Este campo é obrigatório');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function mostrarErro(input, mensagem) {
+            const formGroup = input.closest('.form-group');
+            formGroup.classList.add('error');
+            formGroup.querySelector('.error-message').textContent = mensagem;
+        }
+        
+        function removerErro(input) {
+            const formGroup = input.closest('.form-group');
+            formGroup.classList.remove('error');
+        }
+        
+        function validarFormulario() {
+            const form = document.getElementById('checkoutForm');
+            const inputs = form.querySelectorAll('input[required]');
+            let valido = true;
+            
+            inputs.forEach(input => {
+                if (!validarCampo(input)) {
+                    valido = false;
+                }
+            });
+            
+            return valido;
+        }
+        
+        // Configurar formas de pagamento
+        function configurarPagamento() {
+            document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    document.querySelectorAll('.credit-card-fields, .pix-section, .boleto-section').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    
+                    state.pagamento.metodo = e.target.value;
+                    
+                    if (e.target.value === 'cartao') {
+                        document.getElementById('cartaoFields').classList.add('active');
+                    } else if (e.target.value === 'pix') {
+                        document.getElementById('pixSection').classList.add('active');
+                    } else if (e.target.value === 'boleto') {
+                        document.getElementById('boletoSection').classList.add('active');
+                    }
+                    
+                    // Atualizar confirmação
+                    document.getElementById('confirmationPayment').textContent = 
+                        e.target.value === 'cartao' ? 'Cartão de Crédito' :
+                        e.target.value === 'pix' ? 'PIX' : 'Boleto Bancário';
+                });
+            });
+        }
+        
+        // Gerar QR Code PIX
+        function atualizarQRCodePIX() {
+            if (!state.curso) return;
+            
+            // Gerar código PIX dinâmico
+            const valor = state.curso.valor.toFixed(2);
+            const pixCode = gerarCodigoPIX(valor);
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(pixCode)}`;
+            
+            // Atualizar interface
+            document.getElementById('pixCode').textContent = pixCode;
+            document.getElementById('pixQrCode').innerHTML = `<img src="${qrCodeUrl}" alt="QR Code PIX">`;
+            
+            // Armazenar no estado
+            state.pagamento.pixCode = pixCode;
+        }
+        
+        function gerarCodigoPIX(valor) {
+            const transactionId = 'UNIEJA' + Date.now();
+            return `00020126360014BR.GOV.BCB.PIX0114+55${CONFIG.whatsappNumber.replace('+', '')}520400005303986540${valor}5802BR5925UNIEJA EAD6014SAO PAULO62070503${transactionId}6304`;
+        }
+        
+        // Gerar boleto
+        function gerarBoleto() {
+            if (!state.curso) return;
+            
+            // Gerar dados do boleto
+            const vencimento = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000); // 3 dias
+            const codigoBarras = gerarCodigoBarras(state.curso.valor);
+            
+            // Atualizar interface
+            document.getElementById('boletoCode').textContent = codigoBarras;
+            document.getElementById('boletoDueDate').textContent = formatarData(vencimento);
+            document.getElementById('boletoValue').textContent = formatarMoeda(state.curso.valor);
+            
+            // Armazenar no estado
+            state.pagamento.boleto = {
+                codigoBarras: codigoBarras,
+                vencimento: vencimento,
+                valor: state.curso.valor
+            };
+        }
+        
+        function gerarCodigoBarras(valor) {
+            const valorFormatado = String(Math.round(valor * 100)).padStart(10, '0');
+            return `00190.50095 40144.816069 06809.350314 3 ${valorFormatado}`;
+        }
+        
+        // Funções de cópia
+        function copiarPix() {
+            const pixCode = document.getElementById('pixCode').textContent;
+            copiarParaClipboard(pixCode, 'copyPixButton', 'Código PIX copiado!');
+        }
+        
+        function copiarBoleto() {
+            const boletoCode = document.getElementById('boletoCode').textContent.replace(/\s/g, '');
+            copiarParaClipboard(boletoCode, 'copyBoletoButton', 'Código de barras copiado!');
+        }
+        
+        function copiarParaClipboard(texto, botaoId, mensagemSucesso) {
+            navigator.clipboard.writeText(texto).then(() => {
+                const btn = document.getElementById(botaoId);
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check-circle"></i> Copiado!';
+                btn.classList.add('copied');
+                
+                // Feedback visual
+                showNotification(mensagemSucesso, 'success');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                showNotification('Não foi possível copiar. Tente novamente.', 'error');
+            });
+        }
+        
+        // Processamento da matrícula
+        async function iniciarProcessamento() {
+            if (!validarFormulario()) {
+                showNotification('Por favor, corrija os erros no formulário.', 'error');
+                return;
+            }
+            
+            // Coletar dados
+            coletarDadosPessoais();
+            
+            // Validar cartão se necessário
+            if (state.pagamento.metodo === 'cartao') {
+                if (!validarCartao()) {
+                    showNotification('Dados do cartão inválidos.', 'error');
+                    return;
+                }
+            }
+            
+            // Desabilitar botão e mostrar loading
+            const btn = document.getElementById('submitButton');
+            btn.disabled = true;
+            btn.innerHTML = '<div class="loading"></div> Processando...';
+            
+            try {
+                // Simular processamento
+                await processarMatricula();
+                
+                // Mostrar confirmação
+                mostrarConfirmacao();
+                
+            } catch (error) {
+                // Reativar botão
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-check-circle"></i> Finalizar Matrícula';
+                
+                showNotification('Erro ao processar matrícula. Tente novamente.', 'error');
+                console.error('Erro no processamento:', error);
+            }
+        }
+        
+        function coletarDadosPessoais() {
+            state.dadosPessoais = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('telefone').value,
+                cpf: document.getElementById('cpf').value,
+                nascimento: document.getElementById('nascimento').value
+            };
+            
+            if (state.pagamento.metodo === 'cartao') {
+                state.pagamento.cartao = {
+                    numero: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+                    nome: document.getElementById('cardName').value,
+                    validade: document.getElementById('cardExpiry').value,
+                    cvv: document.getElementById('cardCvv').value
+                };
+            }
+        }
+        
+        function validarCartao() {
+            const numero = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const nome = document.getElementById('cardName').value;
+            const validade = document.getElementById('cardExpiry').value;
+            const cvv = document.getElementById('cardCvv').value;
+            
+            return numero.length >= 16 && 
+                   nome.trim().length > 0 && 
+                   validade.length === 5 && 
+                   cvv.length >= 3;
+        }
+        
+        async function processarMatricula() {
+            // Simular delay de processamento
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Gerar ID da matrícula
+            state.matriculaId = 'MAT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+            state.pagamento.transacaoId = 'TRX' + Date.now();
+            state.pagamento.status = 'aprovado';
+            
+            // Salvar no localStorage para área do aluno
+            localStorage.setItem('matriculaAtiva', JSON.stringify({
+                id: state.matriculaId,
+                curso: state.curso,
+                aluno: state.dadosPessoais,
+                pagamento: state.pagamento,
+                dataMatricula: new Date().toISOString(),
+                status: 'ativa',
+                progresso: 0
+            }));
+            
+            // Simular envio de email
+            enviarEmailConfirmacao();
+            
+            // Rastrear conversão (para Google Analytics)
+            trackConversion(state.curso.nome, state.curso.valor);
+            
+            return true;
+        }
+        
+        function mostrarConfirmacao() {
+            // Atualizar detalhes na confirmação
+            document.getElementById('confirmationCode').textContent = state.matriculaId;
+            
+            // Mostrar modal
+            document.getElementById('confirmationModal').style.display = 'flex';
+            
+            // Fechar modal ao clicar fora
+            document.getElementById('confirmationModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('confirmationModal')) {
+                    redirecionarParaAreaAluno();
+                }
+            });
+        }
+        
+        function redirecionarParaAreaAluno() {
+            // Em produção, redirecionaria para area-aluno.html
+            // Por enquanto, vamos para o index com mensagem
+            window.location.href = 'index.html?matricula=sucesso';
+        }
+        
+        // Funções auxiliares
+        function formatarMoeda(valor) {
+            return 'R$ ' + valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+        
+        function formatarData(data) {
+            return data.toLocaleDateString('pt-BR');
+        }
+        
+        function showNotification(mensagem, tipo = 'info') {
+            // Criar notificação
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                z-index: 10001;
+                animation: slideIn 0.3s;
+                background: ${tipo === 'success' ? '#16a34a' : tipo === 'error' ? '#ef4444' : '#3b82f6'};
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            `;
+            notification.textContent = mensagem;
+            
+            document.body.appendChild(notification);
+            
+            // Remover após 5 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+            
+            // Adicionar estilos de animação
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        function enviarEmailConfirmacao() {
+            // Em produção, integrar com SendGrid, Mailchimp, etc.
+            console.log('Email de confirmação enviado para:', state.dadosPessoais.email);
+            
+            // Simulação de webhook
+            fetch('https://webhook.site/...', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    evento: 'matricula_criada',
+                    dados: {
+                        aluno: state.dadosPessoais,
+                        curso: state.curso,
+                        matriculaId: state.matriculaId
+                    }
+                })
+            }).catch(() => {
+                // Falha silenciosa em ambiente de desenvolvimento
+            });
+        }
+        
+        function trackConversion(curso, valor) {
+            // Implementação para Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+                    'value': valor,
+                    'currency': 'BRL',
+                    'transaction_id': state.matriculaId
+                });
+            }
+            
+            // Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Purchase', {
+                    value: valor,
+                    currency: 'BRL',
+                    content_name: curso
+                });
+            }
+        }
+        
+        // Integração com WhatsApp
+        function abrirWhatsApp() {
+            const mensagem = `Olá! Gostaria de ajuda com minha matrícula no curso ${state.curso?.nome || 'UniEja'}.`;
+            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+        
+        // Prevenir saída da página durante processamento
+        window.addEventListener('beforeunload', (e) => {
+            const btn = document.getElementById('submitButton');
+            if (btn.disabled) {
+                e.preventDefault();
+                e.returnValue = 'Sua matrícula está sendo processada. Tem certeza que deseja sair?';
+                return e.returnValue;
+            }
+        });
+        
+        // Inicializar notificações
+        showNotification('Preencha seus dados para finalizar a matrícula', 'info');
+    </script>
+</body>
+</html>

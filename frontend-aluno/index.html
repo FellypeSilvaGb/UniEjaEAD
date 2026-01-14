@@ -1,197 +1,1170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UniEJA • Escolha Seu Curso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniEja EAD - Conclua seus Estudos 100% Online em 3 Meses</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Conclua seus estudos 100% online em apenas 3 meses com certificado reconhecido pelo MEC. Ensino Fundamental e Médio EJA. Matrícula aberta!">
+    <meta name="keywords" content="EJA, ensino fundamental, ensino médio, cursos online, certificado MEC, estudo em casa">
+    <meta name="author" content="UniEja EAD">
+    <meta property="og:title" content="UniEja EAD - Conclua seus Estudos 100% Online">
+    <meta property="og:description" content="Conclua seus estudos em 3 meses com certificado MEC">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .top-benefits {
+            background: #1e3a8a;
+            padding: 1rem 0;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom: 3px solid #eab308;
+        }
+        
+        .top-benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .benefit-item i {
+            color: #eab308;
+            font-size: 1.1rem;
+        }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: #eab308;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #eab308;
+        }
+        
+        .btn-matricula {
+            background: #16a34a;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid #16a34a;
+        }
+        
+        .btn-matricula:hover {
+            background: white;
+            color: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            color: white;
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            background: #16a34a;
+            color: white;
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+        
+        .hero-description {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-primary {
+            background: #eab308;
+            color: #1e3a8a;
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(234, 179, 8, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: #fbbf24;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(234, 179, 8, 0.5);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .video-section {
+            background: white;
+            padding: 5rem 2rem;
+        }
+        
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 3rem;
+        }
+        
+        .video-player {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        
+        .benefits {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin-bottom: 3rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon.green { color: #16a34a; }
+        .benefit-icon.yellow { color: #eab308; }
+        .benefit-icon.blue { color: #3b82f6; }
+        .benefit-icon.purple { color: #8b5cf6; }
+        
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-text {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .testimonials {
+            background: white;
+            padding: 5rem 2rem;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .testimonial-content {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .author-info h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .stars {
+            color: #eab308;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: #3b82f6;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .faq-question:hover {
+            background: #eff6ff;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #64748b;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-about h3 {
+            color: #eab308;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #eab308;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #eab308;
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        .whatsapp-button {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9998;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        .contact-phone {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e3a8a;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(30, 58, 138, 0.4);
+            z-index: 9998;
+            transition: all 0.3s;
+        }
+        
+        .contact-phone:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(30, 58, 138, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .top-benefits-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-phone {
+                bottom: 8rem;
+                right: 1rem;
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .video-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 1.8rem;
+            }
+            
+            .whatsapp-button {
+                bottom: 1rem;
+                left: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body data-api="../api.php" data-login="../login.html" data-lead="../index.php" data-admin="../admin.html">
-    <div class="texture"></div>
-
-    <header class="site-header">
-        <div class="logo">UniEJA<span>Next</span></div>
-        <nav>
-            <a href="#cursos">Cursos</a>
-            <a href="#trajetoria">Trajetória</a>
-            <a href="#diferenciais">Diferenciais</a>
-        </nav>
-        <div class="header-actions">
-            <button class="ghost-btn">Fale com um mentor</button>
-            <a class="ghost-btn admin-link" href="../login.html" title="Acessar painel administrativo">
-                Área do consultor
-            </a>
+<body>
+    <!-- BARRA DE BENEFÍCIOS NO TOPO -->
+    <div class="top-benefits">
+        <div class="top-benefits-container">
+            <div class="benefit-item">
+                <i class="bi bi-patch-check-fill"></i>
+                <span>Certificado Reconhecido pelo MEC</span>
+            </div>
+            <div class="benefit-item">
+                <i class="bi bi-clock-fill"></i>
+                <span>Conclua em Apenas 3 Meses</span>
+            </div>
+            <div class="benefit-item">
+                <i class="bi bi-phone"></i>
+                <span>Estude pelo Celular ou Computador</span>
+            </div>
+            <div class="benefit-item">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Documentação Inclusa</span>
+            </div>
         </div>
-    </header>
-
-    <main>
-        <section class="hero">
+    </div>
+    
+    <!-- NAVEGAÇÃO -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <i class="bi bi-mortarboard-fill"></i>
+                <div class="logo-text">
+                    <span>UniEja EAD</span>
+                    <span class="logo-subtitle">EDUCAÇÃO A DISTÂNCIA</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><a href="#duvidas">Dúvidas</a></li>
+                <li><a href="checkout.html" class="btn-matricula">Matricular-se</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
             <div class="hero-content">
-                <p class="eyebrow">Nova jornada acadêmica</p>
-                <h1>Escolha o curso ideal e acelere seu futuro em meses, não anos.</h1>
-                <p class="lead">Combine ensino flexível com mentoria individual, certificações oficiais e trilhas pensadas para a realidade Amazônica.</p>
-                <div class="hero-ctas">
-                    <button class="primary-btn">Quero começar agora</button>
-                    <button class="secondary-btn">Explorar trilhas</button>
-                </div>
-                <p class="admin-note">Já faz parte do time? <a href="../login.html">Entrar no painel administrativo</a></p>
-                <ul class="hero-highlights">
-                    <li>
-                        <strong>+6.300</strong>
-                        <span>alunos certificados</span>
-                    </li>
-                    <li>
-                        <strong>96%</strong>
-                        <span>empregabilidade média</span>
-                    </li>
-                    <li>
-                        <strong>18</strong>
-                        <span>cursos ativos</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="hero-panel">
-                <p class="panel-title">Match de curso</p>
-                <h3>Responda 3 perguntas e receba uma trilha personalizada.</h3>
-                <ul>
-                    <li><span>1</span> Estilo de estudo preferido</li>
-                    <li><span>2</span> Objetivo profissional</li>
-                    <li><span>3</span> Tempo disponível por semana</li>
-                </ul>
-                <button class="primary-btn ghost">Começar diagnóstico</button>
-            </div>
-        </section>
-
-        <section id="cursos" class="courses">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Catálogo 2026</p>
-                    <h2>Escolha por área, formato ou ritmo.</h2>
-                </div>
-                <div class="filters">
-                    <div class="search-box">
-                        <span class="icon icon-search" aria-hidden="true"></span>
-                        <input type="text" id="searchInput" placeholder="Busque por nome, área ou habilidade" />
-                    </div>
-                    <div class="chip-group" id="filterChips">
-                        <button class="chip active" data-filter="todos">Todos</button>
-                        <button class="chip" data-filter="EJA">EJA</button>
-                        <button class="chip" data-filter="Tecnológico">Tecnológicos</button>
-                        <button class="chip" data-filter="Profissionalizante">Profissionalizantes</button>
-                        <button class="chip" data-filter="Saúde">Saúde</button>
-                        <button class="chip" data-filter="Tecnologia">Tecnologia</button>
-                    </div>
+                <h1>CONCLUA SEUS ESTUDOS 100% ONLINE</h1>
+                <div class="hero-subtitle">EM APENAS 3 MESES</div>
+                <p class="hero-description">
+                    Estude pelo celular ou computador com certificado reconhecido pelo MEC. 
+                    Material em PDF, sala de aula virtual e suporte completo. 
+                    Sua aprovação é garantida!
+                </p>
+                <div class="hero-cta">
+                    <a href="checkout.html" class="btn-primary">
+                        <i class="bi bi-rocket-takeoff"></i>
+                        Matricular-se Agora
+                    </a>
                 </div>
             </div>
-
-            <div class="course-toolbar">
-                <div class="toggle-group">
-                    <button class="toggle active" data-mode="todos">Todos os formatos</button>
-                    <button class="toggle" data-mode="online">100% Online</button>
-                    <button class="toggle" data-mode="hibrido">Híbrido</button>
-                    <button class="toggle" data-mode="presencial">Presencial</button>
-                </div>
-                <div class="sort-group">
-                    <label for="sortSelect">Ordenar por</label>
-                    <select id="sortSelect">
-                        <option value="popularidade">Popularidade</option>
-                        <option value="duracao">Menor duração</option>
-                        <option value="investimento">Menor investimento</option>
-                    </select>
-                </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="Estudantes felizes">
             </div>
-
-            <div id="courseGrid" class="course-grid"></div>
-
-            <aside class="course-insight" id="courseInsight">
-                <p class="eyebrow">Resumo inteligente</p>
-                <h3>Nenhum curso selecionado ainda.</h3>
-                <p>Toque em um card para ver pré-requisitos, carga horária e benefícios exclusivos.</p>
-                <ul class="insight-list" id="insightList"></ul>
-                <button class="primary-btn" disabled>Quero garantir minha vaga</button>
-            </aside>
-        </section>
-
-        <section id="trajetoria" class="journey">
-            <div>
-                <p class="eyebrow">Roadmap do aluno</p>
-                <h2>Uma jornada guiada em quatro momentos.</h2>
-            </div>
-            <div class="journey-grid">
-                <article>
-                    <span>01</span>
-                    <h4>Descoberta</h4>
-                    <p>Mentor apresenta o plano ideal considerando tempo, foco profissional e experiências anteriores.</p>
-                </article>
-                <article>
-                    <span>02</span>
-                    <h4>Imersão</h4>
-                    <p>Aulas ao vivo, laboratórios remotos, kit de estudos e comunidade exclusiva.</p>
-                </article>
-                <article>
-                    <span>03</span>
-                    <h4>Portfólio</h4>
-                    <p>Projetos reais com empresas da região e feedback técnico validado.</p>
-                </article>
-                <article>
-                    <span>04</span>
-                    <h4>Lançamento</h4>
-                    <p>Career week com simulações de entrevistas, revisão de currículo e conexão com RHs parceiros.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="diferenciais" class="highlights">
-            <article>
-                <h3>Mentorias semanais</h3>
-                <p>Trilhas com checkpoints quinzenais para manter ritmo e ajustar objetivos pessoais.</p>
-            </article>
-            <article>
-                <h3>Certificação dupla</h3>
-                <p>Além do diploma reconhecido, cada curso entrega micro-certificados por competência.</p>
-            </article>
-            <article>
-                <h3>Experiência Amazônia</h3>
-                <p>Conteúdos alinhados às demandas tecnológicas e socioambientais da região Norte.</p>
-            </article>
-        </section>
-    </main>
-
-    <section class="assistant-widget" aria-live="polite">
-        <button class="assistant-fab" id="assistantToggle" aria-label="Abrir mentor virtual">
-            <span class="fab-icon">💬</span>
-            <span class="fab-label">Mentor</span>
-        </button>
-
-        <div class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false">
-            <header>
-                <div>
-                    <p class="eyebrow">Mentor UniEJA</p>
-                    <h4>Posso ajudar agora mesmo.</h4>
-                </div>
-                <button class="assistant-close" id="assistantClose" aria-label="Fechar mentor virtual">×</button>
-            </header>
-            <div class="assistant-messages" id="assistantMessages">
-                <div class="assistant-message bot">
-                    <p>Oi! Sou o guia rápido da UniEJA. Quer acelerar sua matrícula ou entender como está o desempenho das matrículas?</p>
-                    <span>Agora</span>
-                </div>
-            </div>
-            <div class="assistant-actions" id="assistantActions">
-                <button data-question="Quero terminar meu EJA rápido">Quero terminar meu EJA rápido</button>
-                <button data-question="Como estão as matrículas hoje?">Como estão as matrículas hoje?</button>
-                <button data-question="Me fale sobre bolsas">Possuo bolsas?</button>
-            </div>
-            <form class="assistant-form" id="assistantForm">
-                <input type="text" id="assistantInput" placeholder="Escreva sua pergunta" autocomplete="off" />
-                <button type="submit">Enviar</button>
-            </form>
         </div>
     </section>
-
-    <script src="app.js" type="module"></script>
+    
+    <!-- VÍDEO EXPLICATIVO -->
+    <section class="video-section">
+        <div class="video-container">
+            <h2 class="video-title">Como Funciona o UniEja EAD</h2>
+            <div class="video-player">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="Como funciona o UniEja EAD"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BENEFÍCIOS -->
+    <section class="benefits" id="beneficios">
+        <div class="benefits-container">
+            <h2 class="section-title">Benefícios UniEja EAD</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon green">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </div>
+                    <h3 class="benefit-title">Reconhecido pelo MEC</h3>
+                    <p class="benefit-text">Certificado válido em todo território nacional, aceito em concursos públicos e para ingresso no mercado de trabalho.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon yellow">
+                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </div>
+                    <h3 class="benefit-title">Material em PDF</h3>
+                    <p class="benefit-text">Acesse de qualquer dispositivo, a qualquer hora. Material didático completo disponível 24 horas por dia.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon blue">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+                    <h3 class="benefit-title">Sala de Aula Virtual</h3>
+                    <p class="benefit-text">Plataforma completa para seus estudos com videoaulas, exercícios e suporte pedagógico especializado.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon purple">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h3 class="benefit-title">Certificado em 45 dias</h3>
+                    <p class="benefit-text">Receba seu certificado rapidamente após a conclusão do curso. Processo 100% digital e seguro.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon green">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <h3 class="benefit-title">Flexibilidade Total</h3>
+                    <p class="benefit-text">Estude no seu ritmo e horário. Plataforma disponível 24/7 para você organizar seus estudos como preferir.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon yellow">
+                        <i class="bi bi-file-text"></i>
+                    </div>
+                    <h3 class="benefit-title">Documentação Inclusa</h3>
+                    <p class="benefit-text">Todo o processo de documentação está incluído no curso. Não há custos adicionais para emissão do certificado.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon blue">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h3 class="benefit-title">Suporte Completo</h3>
+                    <p class="benefit-text">Equipe pedagógica disponível para tirar suas dúvidas e acompanhar seu progresso durante todo o curso.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon purple">
+                        <i class="bi bi-phone"></i>
+                    </div>
+                    <h3 class="benefit-title">Acesso Mobile</h3>
+                    <p class="benefit-text">Estude pelo celular, tablet ou computador. Plataforma otimizada para todos os dispositivos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials" id="depoimentos">
+        <div class="testimonials-container">
+            <h2 class="section-title">O que nossos alunos pensam</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Depois de anos sem estudar, consegui concluir o ensino fundamental em apenas 3 meses. O material é excelente e pude estudar no meu tempo, depois do trabalho."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Maria Clara, 42 anos</h4>
+                            <p>Concluiu o Ensino Fundamental</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Como mãe de dois filhos, nunca tinha tempo para estudar. Com a UniEja consegui me organizar e finalmente tenho meu certificado do ensino médio. Agora posso fazer concurso!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Paula, 35 anos</h4>
+                            <p>Concluiu o Ensino Médio</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        "Trabalho o dia todo e achava que nunca iria conseguir terminar meus estudos. A UniEja me deu essa oportunidade. O certificado chegou rápido e já usei para uma promoção no trabalho."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JS</div>
+                        <div class="author-info">
+                            <h4>João Silva, 38 anos</h4>
+                            <p>Concluiu em 5 meses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="faq" id="duvidas">
+        <div class="faq-container">
+            <h2 class="section-title">Dúvidas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>O certificado é realmente reconhecido pelo MEC?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Sim! Nosso certificado é reconhecido pelo Ministério da Educação (MEC) e tem validade em todo território nacional. Você pode usá-lo para ingressar no mercado de trabalho, fazer concursos públicos (nível fundamental ou médio, conforme o curso), prestar vestibular ou continuar seus estudos em cursos técnicos e superiores.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Quanto tempo leva para concluir o curso?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    O Ensino Fundamental pode ser concluído em até 3 meses, e o Ensino Médio em até 6 meses. Porém, você estuda no seu ritmo! A plataforma fica disponível 24 horas por dia, 7 dias por semana. Alguns alunos concluem mais rápido, outros precisam de mais tempo - o importante é que você define seu próprio cronograma.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Como funciona o pagamento?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Aceitamos pagamento via PIX (com 5% de desconto) e cartão de crédito (em até 12x). Após a confirmação do pagamento, você recebe acesso imediato à plataforma de estudos. Não cobramos taxa de matrícula e todo o material didático já está incluído no valor do curso.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Preciso ir presencialmente para fazer provas ou pegar o certificado?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Não! Todo o processo é 100% online, desde as aulas até a emissão do certificado. As avaliações são feitas pela plataforma e o certificado é enviado digitalmente. Você pode estudar quando e onde quiser, sem precisar se deslocar.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Posso realmente estudar pelo celular?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Sim! Nossa plataforma é totalmente responsiva e funciona perfeitamente em celulares, tablets e computadores. O material em PDF pode ser baixado e estudado offline, e as videoaulas são otimizadas para qualquer dispositivo. Muitos alunos estudam pelo celular durante o horário de almoço ou no transporte.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Como funciona o suporte durante o curso?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Você terá acesso a um canal direto com nossa equipe pedagógica via WhatsApp e email. Pode tirar dúvidas sobre o conteúdo, questões técnicas da plataforma ou qualquer assunto relacionado ao curso. Nosso tempo médio de resposta é de 2 horas úteis, mas na prática respondemos muito mais rápido.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Qual a idade mínima para fazer o curso?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Para o Ensino Fundamental, é necessário ter pelo menos 15 anos completos. Para o Ensino Médio, é necessário ter pelo menos 18 anos completos. Não há idade máxima - já tivemos alunos com mais de 70 anos concluindo seus estudos conosco!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>E se eu tiver dificuldade com tecnologia?</span>
+                    <i class="bi bi-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Não se preocupe! Nossa plataforma foi desenvolvida para ser extremamente simples e intuitiva. Além disso, oferecemos um tutorial em vídeo que mostra passo a passo como acessar e usar todos os recursos. E se ainda tiver dificuldade, nossa equipe de suporte te guia por chamada de vídeo se necessário.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>UniEja EAD</h3>
+                <p>Educação de qualidade ao alcance de todos. Conclua seus estudos 100% online com certificado reconhecido pelo MEC.</p>
+                <div class="social-links">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Cursos</h4>
+                <ul class="footer-links">
+                    <li><a href="checkout.html">Ensino Fundamental</a></li>
+                    <li><a href="checkout.html">Ensino Médio Completo</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Institucional</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:contato@unieja.com.br">contato@unieja.com.br</a></li>
+                    <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                    <li><a href="https://wa.me/5511999999999">WhatsApp</a></li>
+                    <li><a href="#">Central de Ajuda</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 UniEja EAD. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+        </div>
+    </footer>
+    
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20cursos%20da%20UniEja%20EAD" 
+       target="_blank" 
+       class="whatsapp-button">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- TELEFONE FIXO -->
+    <a href="tel:+5511999999999" class="contact-phone">
+        <i class="bi bi-telephone-fill"></i>
+        (11) 99999-9999
+    </a>
+    
+    <script>
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Fechar todos
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Abrir o clicado (se não estava aberto)
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Redirecionar para checkout
+        function irParaCheckout(tipo, valor) {
+            const cursos = {
+                'fundamental': {
+                    nome: 'EJA Ensino Fundamental',
+                    descricao: 'Complete o Ensino Fundamental com certificado reconhecido pelo MEC',
+                    valor: 897,
+                    duracao: '3 meses',
+                    tipo: 'fundamental'
+                },
+                'completo': {
+                    nome: 'EJA Ensino Médio + Fundamental',
+                    descricao: 'Pacote Completo - Fundamental + Médio com certificado reconhecido pelo MEC',
+                    valor: 1300,
+                    duracao: '6 meses',
+                    tipo: 'completo'
+                }
+            };
+            
+            const curso = cursos[tipo];
+            
+            // Salvar dados do curso no localStorage
+            localStorage.setItem('cursoSelecionado', JSON.stringify(curso));
+            
+            // Redirecionar para a página de checkout
+            window.location.href = 'checkout.html';
+        }
+        
+        // Contador de visitantes (simulado)
+        function updateVisitorCount() {
+            let count = localStorage.getItem('visitorCount') || 0;
+            count = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', count);
+        }
+        
+        // Inicializar quando o DOM carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            // Atualizar contador
+            updateVisitorCount();
+            
+            // Adiciona classe ativa ao navbar durante scroll
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
+                } else {
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                }
+            });
+        });
+        
+        // Função para rastrear conversões (exemplo para Google Analytics)
+        function trackConversion(course, value) {
+            // Simulação de envio para GA
+            console.log(`Conversão rastreada: Curso ${course}, Valor R$ ${value}`);
+            
+            // Em produção, adicione:
+            // gtag('event', 'conversion', {
+            //     'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+            //     'value': value,
+            //     'currency': 'BRL',
+            //     'transaction_id': ''
+            // });
+        }
+    </script>
 </body>
 </html>
