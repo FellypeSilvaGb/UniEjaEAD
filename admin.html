@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin - Projeto Solimões | UniEja</title>
+    <title>Painel Admin - UniEja | Sistema de Gestão</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
@@ -17,18 +17,98 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
-            min-height: 100vh;
+        :root {
+            /* Cores Principais - Aurora Gradient (Roxo + Azul + Rosa) */
+            --primary: #8B5CF6;
+            --primary-light: #A78BFA;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --secondary-light: #F472B6;
+            --accent: #3B82F6;
+            --accent-light: #60A5FA;
+            
+            /* Cores de Sucesso/Status */
+            --success: #10B981;
+            --success-light: #34D399;
+            --warning: #F59E0B;
+            --warning-light: #FBBF24;
+            --danger: #EF4444;
+            --info: #06B6D4;
+            
+            /* Backgrounds */
+            --dark: #0A0118;
+            --darker: #050010;
+            --card-bg: rgba(10, 1, 24, 0.85);
+            --card-border: rgba(139, 92, 246, 0.3);
+            
+            /* Texto */
+            --text-primary: #F5F3FF;
+            --text-secondary: #E9D5FF;
+            --text-muted: #C4B5FD;
+            
+            /* Efeitos */
+            --glow-primary: rgba(139, 92, 246, 0.6);
+            --glow-secondary: rgba(236, 72, 153, 0.6);
+            --glow-success: rgba(16, 185, 129, 0.5);
+            --glow-accent: rgba(59, 130, 246, 0.5);
+            --glow-danger: rgba(239, 68, 68, 0.5);
         }
         
-        /* Header */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #050010 0%, #0A0118 25%, #1A0B2E 50%, #160B28 75%, #0A0118 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Efeito de fundo animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.25) 0%, transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 20% 90%, rgba(167, 139, 250, 0.2) 0%, transparent 35%),
+                radial-gradient(circle at 80% 85%, rgba(244, 114, 182, 0.15) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+            animation: auroraPulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes auroraPulse {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                opacity: 0.9;
+                transform: scale(1.05) rotate(2deg);
+            }
+        }
+        
+        /* ==================== HEADER ==================== */
         .header {
-            background: rgba(20, 20, 40, 0.95);
+            background: rgba(10, 1, 24, 0.95);
+            backdrop-filter: blur(20px);
             padding: 1.5rem 2rem;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)) 1;
+            box-shadow: 
+                0 4px 30px var(--glow-primary),
+                0 0 50px rgba(139, 92, 246, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,88 +116,132 @@
             gap: 1rem;
         }
         
-        .logo {
+        .logo-area {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
         
-        .logo i {
-            font-size: 2.5rem;
-            color: #00ffff;
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 
+                0 8px 25px var(--glow-primary),
+                0 0 40px rgba(139, 92, 246, 0.5),
+                0 0 60px rgba(236, 72, 153, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 8px 25px var(--glow-primary),
+                    0 0 40px rgba(139, 92, 246, 0.5);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 
+                    0 12px 35px var(--glow-primary),
+                    0 0 60px rgba(139, 92, 246, 0.7),
+                    0 0 80px rgba(236, 72, 153, 0.4);
+            }
         }
         
         .logo-text h1 {
-            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            color: #00ffff;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin: 0;
+            line-height: 1;
         }
         
         .logo-text .subtitle {
-            font-size: 0.85rem;
-            color: #ff00ff;
-            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 0.25rem;
         }
         
-        .header-links {
+        .header-actions {
             display: flex;
             gap: 0.75rem;
-            flex-wrap: wrap;
         }
-
-        .btn-dashboard {
-            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
-            color: #000;
+        
+        .btn-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 10px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px var(--glow-primary);
+        }
+        
+        .btn-header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--glow-primary);
+        }
+        
+        .btn-dashboard {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+            box-shadow: 0 4px 15px var(--glow-success);
         }
         
         .btn-dashboard:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
-        }
-
-        .btn-frontend {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-frontend:hover {
-            border-color: #00ffff;
-            color: #00ffff;
-            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow-success);
         }
         
-        /* Navigation */
+        .btn-logout {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            box-shadow: 0 4px 15px var(--glow-danger);
+        }
+        
+        .btn-logout:hover {
+            box-shadow: 0 10px 30px var(--glow-danger);
+        }
+        
+        /* ==================== NAVIGATION ==================== */
         .nav-tabs {
-            background: rgba(20, 20, 40, 0.5);
-            padding: 1.5rem 2rem;
+            background: rgba(10, 1, 24, 0.85);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 9;
+            box-shadow: 0 2px 20px rgba(139, 92, 246, 0.15);
+        }
+        
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
         
         .nav-tab {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #999;
-            padding: 0.75rem 1.5rem;
+            background: rgba(139, 92, 246, 0.08);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
@@ -125,82 +249,170 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 500;
+            font-size: 0.9rem;
         }
         
         .nav-tab:hover {
-            border-color: #00ffff;
-            color: #00ffff;
-            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--primary-light);
+            color: white;
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 20px var(--glow-primary),
+                0 0 30px rgba(139, 92, 246, 0.4);
         }
         
         .nav-tab.active {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(138, 43, 226, 0.2));
-            border-color: #00ffff;
-            color: #00ffff;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, var(--primary-light), var(--secondary-light)) 1;
+            color: white;
+            box-shadow: 
+                0 4px 25px var(--glow-primary),
+                0 0 40px rgba(139, 92, 246, 0.5),
+                0 0 50px rgba(236, 72, 153, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
         }
         
-        /* Container */
+        /* ==================== CONTAINER ==================== */
         .container {
             max-width: 1600px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
-        /* Stats Grid */
+        /* ==================== STATS GRID ==================== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
         
         .stat-card {
-            background: linear-gradient(135deg, rgba(139, 0, 139, 0.2) 0%, rgba(75, 0, 130, 0.2) 100%);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            border-radius: 15px;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 18px;
             padding: 2rem;
-            text-align: center;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+            transition: all 0.3s;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(30%, -30%) rotate(0deg); }
+            50% { transform: translate(35%, -35%) rotate(180deg); }
         }
         
         .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff00ff;
-            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 15px 50px var(--glow-primary),
+                0 0 60px rgba(139, 92, 246, 0.4),
+                0 0 80px rgba(236, 72, 153, 0.3),
+                inset 0 0 30px rgba(139, 92, 246, 0.05);
         }
         
-        .stat-card i {
-            font-size: 3rem;
+        .stat-card:hover::before {
+            transform: translate(30%, -30%) scale(1.3) rotate(360deg);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.2) 50%, transparent 70%);
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
         }
         
-        .stat-card.vendas i { color: #00ffff; }
-        .stat-card.quantidade i { color: #ff00ff; }
-        .stat-card.clientes i { color: #00ff88; }
-        .stat-card.produtos i { color: #ffaa00; }
-        
-        .stat-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: #00ffff;
-            margin: 0.5rem 0;
-            font-weight: 900;
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .stat-card p {
-            color: #999;
+        .stat-card.vendas .stat-icon {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+            color: white;
+            box-shadow: 
+                0 8px 30px var(--glow-success),
+                0 0 40px rgba(16, 185, 129, 0.5);
+        }
+        
+        .stat-card.quantidade .stat-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 
+                0 8px 30px var(--glow-primary),
+                0 0 40px rgba(139, 92, 246, 0.6),
+                0 0 50px rgba(236, 72, 153, 0.4);
+        }
+        
+        .stat-card.clientes .stat-icon {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            box-shadow: 
+                0 8px 30px var(--glow-accent),
+                0 0 40px rgba(59, 130, 246, 0.6);
+        }
+        
+        .stat-card.produtos .stat-icon {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 
+                0 8px 30px var(--glow-secondary),
+                0 0 40px rgba(236, 72, 153, 0.5);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 0.5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
             font-size: 0.85rem;
             text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
-        /* Sections */
+        /* ==================== SECTIONS ==================== */
         .section {
             display: none;
         }
         
         .section.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
         
         @keyframes fadeIn {
@@ -208,32 +420,40 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Form Card */
+        /* ==================== FORM CARD ==================== */
         .form-card {
-            background: rgba(20, 20, 40, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
         
         .form-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ffff;
+            color: white;
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--card-border);
         }
         
         .form-title i {
-            font-size: 2rem;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
         .form-group {
@@ -242,7 +462,7 @@
         }
         
         .form-group label {
-            color: #00ffff;
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
             font-weight: 600;
             font-size: 0.9rem;
@@ -250,34 +470,122 @@
         
         .form-group input,
         .form-group select {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #fff;
-            padding: 1rem;
+            background: rgba(10, 1, 24, 0.8);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            color: white;
+            padding: 0.9rem 1rem;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
         
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #00ffff;
-            box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
-            background: rgba(0, 255, 255, 0.05);
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 0 0 3px var(--glow-primary),
+                0 0 30px rgba(139, 92, 246, 0.3),
+                0 0 40px rgba(236, 72, 153, 0.2);
+            background: rgba(10, 1, 24, 0.95);
         }
         
         .form-group input::placeholder {
-            color: #666;
+            color: var(--text-muted);
         }
         
         .form-group input[readonly] {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(138, 43, 226, 0.2));
-            border-color: #00ffff;
-            color: #00ffff;
-            font-weight: 700;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-color: var(--primary);
+            color: var(--primary-light);
+            font-weight: 600;
+            cursor: not-allowed;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
         }
         
+        .form-group select {
+            cursor: pointer;
+        }
+        
+        .form-group select option {
+            background: var(--dark);
+            color: white;
+        }
+        
+        /* ==================== DISCOUNT SELECTOR ==================== */
+        .discount-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+        
+        .discount-option {
+            background: rgba(10, 1, 24, 0.8);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            color: var(--text-secondary);
+            padding: 0.75rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .discount-option:hover {
+            border-color: var(--primary-light);
+            background: rgba(139, 92, 246, 0.2);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 
+                0 6px 20px var(--glow-primary),
+                0 0 35px rgba(139, 92, 246, 0.4),
+                0 0 45px rgba(236, 72, 153, 0.3);
+        }
+        
+        .discount-option.selected {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+            border-color: var(--success);
+            color: white;
+            box-shadow: 
+                0 6px 25px var(--glow-success),
+                0 0 40px rgba(16, 185, 129, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .discount-info {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            color: var(--success-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        
+        .discount-info.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ==================== BUTTONS ==================== */
         .form-actions {
             display: flex;
             gap: 1rem;
@@ -285,8 +593,8 @@
         }
         
         .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 10px;
+            padding: 1rem 2rem;
+            border-radius: 12px;
             border: none;
             cursor: pointer;
             font-size: 1rem;
@@ -299,30 +607,55 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
-            color: #000;
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+            color: white;
             flex: 1;
+            box-shadow: 
+                0 4px 20px var(--glow-success),
+                0 0 40px rgba(16, 185, 129, 0.4);
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px var(--glow-success),
+                0 0 60px rgba(16, 185, 129, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary {
-            background: rgba(100, 100, 100, 0.3);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(139, 92, 246, 0.15);
+            color: white;
+            border: 2px solid rgba(139, 92, 246, 0.4);
         }
         
         .btn-secondary:hover {
-            background: rgba(100, 100, 100, 0.5);
+            background: rgba(139, 92, 246, 0.25);
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 4px 20px var(--glow-primary),
+                0 0 30px rgba(139, 92, 246, 0.3);
         }
         
-        /* Table */
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 20px var(--glow-danger);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--glow-danger);
+        }
+        
+        /* ==================== TABLE ==================== */
         .table-container {
             overflow-x: auto;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
         }
         
         table {
@@ -331,242 +664,264 @@
         }
         
         thead th {
-            background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(138, 43, 226, 0.2) 100%);
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 100%);
             padding: 1rem;
             text-align: left;
             font-weight: 700;
-            color: #00ffff;
+            color: white;
             font-size: 0.85rem;
             text-transform: uppercase;
-            border-bottom: 2px solid #00ffff;
+            border-bottom: 2px solid var(--primary);
         }
         
         tbody td {
             padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
             font-size: 0.9rem;
+            color: var(--text-secondary);
         }
         
         tbody tr {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(10, 1, 24, 0.4);
             transition: all 0.2s;
         }
         
         tbody tr:hover {
-            background: rgba(0, 255, 255, 0.05);
-            transform: translateX(5px);
+            background: rgba(139, 92, 246, 0.15);
+            transform: scale(1.01);
         }
         
-        /* Products Grid */
+        /* ==================== PRODUCTS GRID ==================== */
         .produtos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
         .produto-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 18px;
+            padding: 2.5rem;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .produto-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 60%);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            transition: all 0.3s;
+            animation: float 6s ease-in-out infinite;
         }
         
         .produto-card:hover {
-            transform: translateY(-5px);
-            border-color: #00ffff;
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            transform: translateY(-10px);
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 20px 60px var(--glow-primary),
+                0 0 80px rgba(139, 92, 246, 0.4),
+                inset 0 0 30px rgba(139, 92, 246, 0.05);
         }
         
-        .produto-card i {
-            font-size: 3rem;
-            color: #00ffff;
-            margin-bottom: 1rem;
+        .produto-card:hover::before {
+            transform: translate(40%, -40%) scale(1.4);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 60%);
+        }
+        
+        .produto-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .produto-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 
+                0 8px 30px var(--glow-primary),
+                0 0 50px rgba(139, 92, 246, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
         }
         
         .produto-card h4 {
-            font-size: 1.2rem;
-            color: #fff;
+            font-size: 1.3rem;
+            color: white;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            font-weight: 600;
         }
         
         .produto-card p {
-            color: #999;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
         
-        .produto-card .preco {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: #00ff88;
+        .preco-container {
+            background: rgba(10, 1, 24, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        
+        .preco-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .preco {
+            font-size: 2.5rem;
+            color: var(--success);
             font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
         }
         
-        /* Badge UniEja */
-        .unieja-badge {
-            background: linear-gradient(135deg, #ff00ff 0%, #8a2be2 100%);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: #fff;
-            font-weight: 700;
-            margin-left: 0.5rem;
+        .descontos-disponiveis {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
         }
-
-        /* Assistant Widget */
-        .assistant-widget {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 2000;
-            font-family: 'Inter', sans-serif;
+        
+        .descontos-disponiveis h5 {
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
-
-        .assistant-fab {
-            border: none;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #00ffff, #8a2be2);
-            color: #000;
-            padding: 0.85rem 1.5rem;
-            display: inline-flex;
-            gap: 0.5rem;
-            align-items: center;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.35);
-        }
-
-        .assistant-fab .fab-icon {
-            font-size: 1.25rem;
-        }
-
-        .assistant-panel {
-            position: absolute;
-            bottom: 4.5rem;
-            right: 0;
-            width: min(360px, 95vw);
-            background: rgba(5, 10, 25, 0.95);
-            border: 1px solid rgba(0, 255, 255, 0.25);
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-        }
-
-        .assistant-panel.open {
-            display: flex;
-        }
-
-        .assistant-panel header {
-            padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .assistant-panel header h4 {
-            margin-top: 0.35rem;
-        }
-
-        .assistant-close {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        .assistant-messages {
-            max-height: 320px;
-            overflow-y: auto;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .assistant-message {
-            padding: 0.85rem 1rem;
-            border-radius: 15px;
-            line-height: 1.4;
-            display: inline-flex;
-            flex-direction: column;
-            max-width: 90%;
-            font-size: 0.95rem;
-        }
-
-        .assistant-message span {
-            margin-top: 0.35rem;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .assistant-message.bot {
-            background: rgba(0, 255, 255, 0.08);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .assistant-message.user {
-            background: rgba(255, 0, 255, 0.1);
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            align-self: flex-end;
-        }
-
-        .assistant-actions {
+        
+        .desconto-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            padding: 0 1.5rem 1rem;
-        }
-
-        .assistant-actions button {
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            padding: 0.4rem 0.95rem;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .assistant-actions button:hover {
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .assistant-form {
-            display: flex;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem 1.5rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        .assistant-form input {
-            flex: 1;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            padding: 0.75rem 1.1rem;
-        }
-
-        .assistant-form button {
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(135deg, #00ffff, #8a2be2);
-            color: #000;
-            padding: 0.75rem 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
         }
         
+        .badge-desconto {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* ==================== VENDEDORES ESPECÍFICOS ==================== */
+        .vendedores-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .vendedor-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--card-border);
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 60px var(--glow-primary);
+            animation: slideIn 0.3s ease;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--card-border);
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
@@ -574,102 +929,128 @@
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            .assistant-widget {
-                right: 1rem;
-                bottom: 1rem;
+            .produtos-grid {
+                grid-template-columns: 1fr;
             }
-            .assistant-panel {
-                right: 0;
-                left: 0;
-                margin: 0 auto;
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-actions {
+                flex-direction: column;
+            }
+            .discount-selector {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             }
         }
     </style>
-    <script>
-        (function () {
-            const storageKey = 'usuarioLogado';
-            const usuario = sessionStorage.getItem(storageKey) || localStorage.getItem(storageKey);
-            if (!usuario) {
-                window.location.href = 'login.html';
-            }
-        })();
-    </script>
 </head>
 <body>
-    <!-- Header -->
+    <!-- HEADER -->
     <div class="header">
-        <div class="logo">
-            <i class="bi bi-speedometer2"></i>
-            <div class="logo-text">
-                <h1>Projeto Solimões <span class="unieja-badge">UniEja</span></h1>
-                <div class="subtitle">Painel Administrativo | EJA Ensino Médio e Fundamental</div>
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    🎓
+                </div>
+                <div class="logo-text">
+                    <h1>UniEja - Sistema Admin</h1>
+                    <div class="subtitle">Gestão de Matrículas EJA | Ensino Fundamental e Médio</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="dashboard.html" class="btn-header btn-dashboard">
+                    <i class="bi bi-graph-up"></i> Ver Dashboard
+                </a>
+                <button class="btn-header btn-logout" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Sair
+                </button>
             </div>
         </div>
-            <div class="header-links">
-                <a class="btn-dashboard" id="btnDashboard" href="dashboard.html">
-                    <i class="bi bi-speedometer2"></i>
-                    Dashboard Tempo Real
-                </a>
-                <a class="btn-frontend" href="/">
-                    <i class="bi bi-arrow-return-left"></i>
-                    Voltar para o Frontend
-                </a>
-            </div>
     </div>
     
-    <!-- Navigation -->
+    <!-- NAVIGATION -->
     <div class="nav-tabs">
-        <button class="nav-tab active" onclick="mudarAba('nova')">
-            <i class="bi bi-cart-plus"></i> Nova Venda
-        </button>
-        <button class="nav-tab" onclick="mudarAba('listar')">
-            <i class="bi bi-list-ul"></i> Listar Vendas
-        </button>
-        <button class="nav-tab" onclick="mudarAba('clientes')">
-            <i class="bi bi-people"></i> Clientes
-        </button>
-        <button class="nav-tab" onclick="mudarAba('produtos')">
-            <i class="bi bi-mortarboard"></i> Produtos UniEja
-        </button>
-        <button class="nav-tab" onclick="mudarAba('vendedores')">
-            <i class="bi bi-person-badge"></i> Vendedores
-        </button>
-        <button class="nav-tab" onclick="mudarAba('meta')">
-            <i class="bi bi-trophy"></i> Meta
-        </button>
+        <div class="nav-container">
+            <button class="nav-tab active" onclick="mudarAba('nova')">
+                <i class="bi bi-cart-plus"></i> Nova Matrícula
+            </button>
+            <button class="nav-tab" onclick="mudarAba('listar')">
+                <i class="bi bi-list-ul"></i> Listar Matrículas
+            </button>
+            <button class="nav-tab" onclick="mudarAba('clientes')">
+                <i class="bi bi-people"></i> Alunos
+            </button>
+            <button class="nav-tab" onclick="mudarAba('produtos')">
+                <i class="bi bi-mortarboard"></i> Cursos
+            </button>
+            <button class="nav-tab" onclick="mudarAba('vendedores')">
+                <i class="bi bi-person-badge"></i> Consultores
+            </button>
+            <button class="nav-tab" onclick="mudarAba('meta')">
+                <i class="bi bi-trophy"></i> Meta Mensal
+            </button>
+        </div>
     </div>
     
     <div class="container">
-        <!-- Stats -->
+        <!-- STATS -->
         <div class="stats-grid">
             <div class="stat-card vendas">
-                <i class="bi bi-cash-coin"></i>
-                <h3 id="totalMes">R$ 0,00</h3>
-                <p>Total do Mês</p>
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Total do Mês</div>
+                        <div class="stat-value" id="totalMes">R$ 0,00</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                </div>
             </div>
+            
             <div class="stat-card quantidade">
-                <i class="bi bi-cart-check"></i>
-                <h3 id="vendasMes">0</h3>
-                <p>Vendas do Mês</p>
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Matrículas do Mês</div>
+                        <div class="stat-value" id="vendasMes">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-cart-check"></i>
+                    </div>
+                </div>
             </div>
+            
             <div class="stat-card clientes">
-                <i class="bi bi-people-fill"></i>
-                <h3 id="totalClientes">0</h3>
-                <p>Total Clientes</p>
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Total de Alunos</div>
+                        <div class="stat-value" id="totalClientes">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                </div>
             </div>
+            
             <div class="stat-card produtos">
-                <i class="bi bi-mortarboard-fill"></i>
-                <h3 id="totalProdutos">8</h3>
-                <p>Cursos UniEja</p>
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Cursos Disponíveis</div>
+                        <div class="stat-value" id="totalProdutos">2</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- Seção: Nova Venda -->
+        <!-- SEÇÃO: NOVA MATRÍCULA -->
         <div class="section active" id="section-nova">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-cart-plus"></i>
-                    Registrar Nova Venda - UniEja EJA
+                    Registrar Nova Matrícula
                 </h2>
                 <form id="formVenda">
                     <div class="form-grid">
@@ -678,19 +1059,19 @@
                             <input type="text" id="cliente" placeholder="Nome completo do aluno" required>
                         </div>
                         <div class="form-group">
-                            <label>Email do Aluno *</label>
+                            <label>Email *</label>
                             <input type="email" id="email" placeholder="aluno@email.com" required>
                         </div>
                         <div class="form-group">
-                            <label>Telefone do Aluno *</label>
-                            <input type="text" id="telefone" placeholder="(11) 98765-4321" required>
+                            <label>Telefone *</label>
+                            <input type="text" id="telefone" placeholder="(92) 98765-4321" required>
                         </div>
                     </div>
                     
                     <div class="form-grid">
                         <div class="form-group">
-                            <label>Curso UniEja *</label>
-                            <select id="produto" required>
+                            <label>Curso EJA *</label>
+                            <select id="produto" required onchange="carregarDescontos()">
                                 <option value="">Selecione o curso</option>
                             </select>
                         </div>
@@ -702,8 +1083,15 @@
                         </div>
                         <div class="form-group">
                             <label>Valor (R$) *</label>
-                            <input type="number" id="valor" placeholder="0,00" step="0.01" required>
+                            <input type="number" id="valor" placeholder="0,00" step="0.01" required readonly>
                         </div>
+                    </div>
+                    
+                    <!-- SELETOR DE DESCONTOS -->
+                    <div class="form-group" id="descontosContainer" style="display: none;">
+                        <label>Selecione o Valor com Desconto</label>
+                        <div class="discount-selector" id="descontosList"></div>
+                        <div class="discount-info" id="descontoInfo"></div>
                     </div>
                     
                     <div class="form-grid">
@@ -727,7 +1115,7 @@
                     
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-check-circle"></i> Registrar Matrícula UniEja
+                            <i class="bi bi-check-circle"></i> Registrar Matrícula
                         </button>
                         <button type="button" class="btn btn-secondary" onclick="limparForm()">
                             <i class="bi bi-x-circle"></i> Limpar
@@ -737,12 +1125,12 @@
             </div>
         </div>
         
-        <!-- Seção: Listar Vendas -->
+        <!-- SEÇÃO: LISTAR MATRÍCULAS -->
         <div class="section" id="section-listar">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-list-ul"></i>
-                    Todas as Matrículas UniEja
+                    Todas as Matrículas
                 </h2>
                 <div class="table-container">
                     <table>
@@ -760,19 +1148,19 @@
                             </tr>
                         </thead>
                         <tbody id="tabelaVendas">
-                            <tr><td colspan="9" style="text-align: center; color: #666; padding: 2rem;">Carregando...</td></tr>
+                            <tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 2rem;">Carregando...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         
-        <!-- Seção: Clientes -->
+        <!-- SEÇÃO: ALUNOS -->
         <div class="section" id="section-clientes">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-people"></i>
-                    Alunos Matriculados - UniEja
+                    Alunos Matriculados
                 </h2>
                 <div class="table-container">
                     <table>
@@ -787,45 +1175,52 @@
                             </tr>
                         </thead>
                         <tbody id="tabelaClientes">
-                            <tr><td colspan="6" style="text-align: center; color: #666; padding: 2rem;">Carregando...</td></tr>
+                            <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">Carregando...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         
-        <!-- Seção: Produtos -->
+        <!-- SEÇÃO: CURSOS -->
         <div class="section" id="section-produtos">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-mortarboard"></i>
-                    Cursos Disponíveis - UniEja EJA
+                    Cursos Disponíveis - EJA
                 </h2>
                 <div class="produtos-grid" id="listaProdutos">
-                    <p style="text-align: center; color: #666;">Carregando cursos...</p>
+                    <p style="text-align: center; color: var(--text-muted);">Carregando cursos...</p>
                 </div>
             </div>
         </div>
         
-        <!-- Seção: Vendedores -->
+        <!-- SEÇÃO: CONSULTORES -->
         <div class="section" id="section-vendedores">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-person-badge"></i>
-                    Consultores UniEja
+                    Equipe de Consultores
                 </h2>
+                
+                <div class="vendedores-actions">
+                    <button class="btn btn-primary" onclick="abrirModalNovoVendedor()">
+                        <i class="bi bi-person-plus"></i> Adicionar Consultor
+                    </button>
+                </div>
+                
                 <div class="produtos-grid" id="listaVendedores">
-                    <p style="text-align: center; color: #666;">Carregando consultores...</p>
+                    <p style="text-align: center; color: var(--text-muted);">Carregando consultores...</p>
                 </div>
             </div>
         </div>
         
-        <!-- Seção: Meta -->
+        <!-- SEÇÃO: META -->
         <div class="section" id="section-meta">
             <div class="form-card">
                 <h2 class="form-title">
                     <i class="bi bi-trophy"></i>
-                    Definir Meta Mensal - UniEja
+                    Definir Meta Mensal
                 </h2>
                 <form id="formMeta">
                     <div class="form-grid">
@@ -844,37 +1239,186 @@
         </div>
     </div>
     
-    <section class="assistant-widget" aria-live="polite">
-        <button class="assistant-fab" id="assistantToggle" aria-label="Abrir mentor do painel">
-            <span class="fab-icon">💬</span>
-            <span>Mentor UniEja</span>
-        </button>
-        <div class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false">
-            <header>
-                <div>
-                    <p style="color: #00ffff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;">Assistente em Plantão</p>
-                    <h4>Resumo rápido das matrículas</h4>
-                </div>
-                <button class="assistant-close" id="assistantClose" aria-label="Fechar mentor">×</button>
-            </header>
-            <div class="assistant-messages" id="assistantMessages">
-                <div class="assistant-message bot">
-                    <p>Oi! Posso trazer o resumo do dia, lembrar metas e orientar novas matrículas direto daqui do painel.</p>
-                    <span>Agora</span>
-                </div>
+    <!-- MODAL: NOVO VENDEDOR -->
+    <div class="modal" id="modalNovoVendedor">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="bi bi-person-plus"></i>
+                    Adicionar Consultor
+                </h3>
+                <button class="modal-close" onclick="fecharModalNovoVendedor()">
+                    <i class="bi bi-x"></i>
+                </button>
             </div>
-            <div class="assistant-actions" id="assistantActions">
-                <button type="button" data-question="Quais matrículas foram registradas hoje?">Como estão as matrículas?</button>
-                <button type="button" data-question="Existe alguma bolsa ativa?">Tem bolsa ativa?</button>
-                <button type="button" data-question="Preciso fechar a meta do mês">Como bater a meta?</button>
-            </div>
-            <form class="assistant-form" id="assistantForm">
-                <input type="text" id="assistantInput" placeholder="Pergunte algo sobre o painel" autocomplete="off">
-                <button type="submit">Enviar</button>
+            
+            <form id="formNovoVendedor">
+                <div class="form-group">
+                    <label>Nome do Consultor *</label>
+                    <input type="text" id="nomeVendedor" placeholder="Nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email (opcional)</label>
+                    <input type="email" id="emailVendedor" placeholder="email@exemplo.com">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Adicionar
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalNovoVendedor()">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                </div>
             </form>
         </div>
-    </section>
-
+    </div>
+    
     <script src="admin.js"></script>
+    
+    <script>
+        // LOGOUT
+        function logout() {
+            if (confirm('Deseja realmente sair do sistema?')) {
+                localStorage.removeItem('usuario');
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Verificar se está logado
+        window.addEventListener('DOMContentLoaded', () => {
+            const usuario = localStorage.getItem('usuario');
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+        });
+        
+        // MODAL VENDEDOR
+        function abrirModalNovoVendedor() {
+            document.getElementById('modalNovoVendedor').classList.add('show');
+        }
+        
+        function fecharModalNovoVendedor() {
+            document.getElementById('modalNovoVendedor').classList.remove('show');
+            document.getElementById('formNovoVendedor').reset();
+        }
+        
+        // ADICIONAR VENDEDOR
+        document.getElementById('formNovoVendedor').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('action', 'adicionarVendedor');
+            formData.append('nome', document.getElementById('nomeVendedor').value);
+            formData.append('email', document.getElementById('emailVendedor').value);
+            
+            try {
+                const response = await fetch('api.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.sucesso) {
+                    alert('✅ Consultor adicionado com sucesso!');
+                    fecharModalNovoVendedor();
+                    carregarVendedores();
+                } else {
+                    alert('❌ Erro: ' + (data.mensagem || 'Erro ao adicionar consultor'));
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('❌ Erro ao conectar com o servidor');
+            }
+        });
+        
+        // REMOVER VENDEDOR
+        async function removerVendedor(id, nome) {
+            if (!confirm(`Deseja realmente remover o consultor "${nome}"?`)) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('action', 'removerVendedor');
+            formData.append('id', id);
+            
+            try {
+                const response = await fetch('api.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.sucesso) {
+                    alert('✅ Consultor removido com sucesso!');
+                    carregarVendedores();
+                } else {
+                    alert('❌ Erro: ' + (data.mensagem || 'Erro ao remover consultor'));
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('❌ Erro ao conectar com o servidor');
+            }
+        }
+        
+        // Função para carregar descontos baseado no curso selecionado
+        function carregarDescontos() {
+            const produtoSelect = document.getElementById('produto');
+            const descontosContainer = document.getElementById('descontosContainer');
+            const descontosList = document.getElementById('descontosList');
+            const valorInput = document.getElementById('valor');
+            const descontoInfo = document.getElementById('descontoInfo');
+            
+            if (produtoSelect.value) {
+                const produto = JSON.parse(produtoSelect.value);
+                descontosContainer.style.display = 'block';
+                descontosList.innerHTML = '';
+                
+                // Criar opções de desconto
+                produto.descontos.forEach((desconto, index) => {
+                    const option = document.createElement('div');
+                    option.className = 'discount-option';
+                    option.textContent = `R$ ${desconto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                    option.onclick = () => selecionarDesconto(desconto, produto.valorBase, option);
+                    descontosList.appendChild(option);
+                });
+            } else {
+                descontosContainer.style.display = 'none';
+                valorInput.value = '';
+                descontoInfo.classList.remove('show');
+            }
+        }
+        
+        // Função para selecionar um desconto
+        function selecionarDesconto(valorDesconto, valorBase, element) {
+            // Remove seleção anterior
+            document.querySelectorAll('.discount-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Adiciona seleção atual
+            element.classList.add('selected');
+            
+            // Atualiza o campo de valor
+            document.getElementById('valor').value = valorDesconto;
+            
+            // Calcula e mostra a economia
+            const economia = valorBase - valorDesconto;
+            const percentual = ((economia / valorBase) * 100).toFixed(1);
+            const descontoInfo = document.getElementById('descontoInfo');
+            descontoInfo.innerHTML = `💰 Economia de <strong>R$ ${economia.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong> (${percentual}% OFF)`;
+            descontoInfo.classList.add('show');
+        }
+        
+        // Fechar modal ao clicar fora
+        document.getElementById('modalNovoVendedor').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalNovoVendedor();
+            }
+        });
+    </script>
 </body>
 </html>

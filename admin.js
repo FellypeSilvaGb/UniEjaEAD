@@ -1,5 +1,5 @@
 // =============================================
-// ADMIN.JS - Projeto Solimões | UniEja
+// ADMIN.JS - UniEja | UniEja
 // Sistema Completo e Funcional
 // =============================================
 
@@ -147,7 +147,7 @@ function initAssistant() {
     });
 }
 
-console.log('🚀 Admin Projeto Solimões carregado!');
+console.log('🚀 Admin UniEja carregado!');
 
 // =============================================
 // NAVEGAÇÃO - CORRIGIDA
@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initAssistant();
     
-    console.log('✅ Admin Projeto Solimões pronto!');
+    console.log('✅ Admin UniEja pronto!');
     console.log('📋 Sistema: UniEja EJA');
     console.log('🔗 API:', API_URL);
 });

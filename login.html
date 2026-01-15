@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Projeto Solimões | UniEja</title>
+    <title>Login - UniEja | Sistema de Gestão EJA</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,10 +17,33 @@
             box-sizing: border-box;
         }
         
+        :root {
+            /* Cores Aurora Gradient - Mesmas do painel admin */
+            --primary: #8B5CF6;
+            --primary-light: #A78BFA;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --secondary-light: #F472B6;
+            --accent: #3B82F6;
+            --accent-light: #60A5FA;
+            --success: #10B981;
+            --success-light: #34D399;
+            --danger: #EF4444;
+            --dark: #0A0118;
+            --darker: #050010;
+            --card-bg: rgba(10, 1, 24, 0.85);
+            --card-border: rgba(139, 92, 246, 0.3);
+            --text-primary: #F5F3FF;
+            --text-secondary: #E9D5FF;
+            --text-muted: #C4B5FD;
+            --glow-primary: rgba(139, 92, 246, 0.6);
+            --glow-secondary: rgba(236, 72, 153, 0.6);
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
+            background: linear-gradient(135deg, #050010 0%, #0A0118 25%, #1A0B2E 50%, #160B28 75%, #0A0118 100%);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,7 +52,7 @@
             overflow: hidden;
         }
         
-        /* Background Animado Imersivo */
+        /* Background Animado Aurora */
         body::before {
             content: '';
             position: fixed;
@@ -38,17 +61,25 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.12) 0%, transparent 50%);
-            animation: backgroundPulse 15s ease-in-out infinite;
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.25) 0%, transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 20% 90%, rgba(167, 139, 250, 0.2) 0%, transparent 35%),
+                radial-gradient(circle at 80% 85%, rgba(244, 114, 182, 0.15) 0%, transparent 30%);
             pointer-events: none;
             z-index: 0;
+            animation: auroraPulse 10s ease-in-out infinite;
         }
         
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+        @keyframes auroraPulse {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                opacity: 0.9;
+                transform: scale(1.05) rotate(2deg);
+            }
         }
         
         /* Partículas Flutuantes */
@@ -60,12 +91,11 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(2px 2px at 20% 30%, rgba(0, 255, 255, 0.4), transparent),
-                radial-gradient(2px 2px at 60% 70%, rgba(138, 43, 226, 0.4), transparent),
-                radial-gradient(2px 2px at 50% 50%, rgba(255, 0, 255, 0.4), transparent),
-                radial-gradient(2px 2px at 80% 10%, rgba(0, 255, 255, 0.4), transparent),
-                radial-gradient(2px 2px at 90% 60%, rgba(138, 43, 226, 0.4), transparent),
-                radial-gradient(2px 2px at 10% 90%, rgba(255, 0, 255, 0.4), transparent);
+                radial-gradient(2px 2px at 20% 30%, rgba(139, 92, 246, 0.4), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(236, 72, 153, 0.4), transparent),
+                radial-gradient(2px 2px at 50% 50%, rgba(59, 130, 246, 0.4), transparent),
+                radial-gradient(2px 2px at 80% 10%, rgba(167, 139, 250, 0.4), transparent),
+                radial-gradient(2px 2px at 90% 60%, rgba(244, 114, 182, 0.4), transparent);
             background-size: 200% 200%;
             animation: particles 25s linear infinite;
             pointer-events: none;
@@ -85,8 +115,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: gridMove 20s linear infinite;
             pointer-events: none;
@@ -109,17 +139,18 @@
         
         /* Card de Login */
         .login-card {
-            background: linear-gradient(135deg, rgba(20, 20, 40, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
-            border: 2px solid rgba(0, 255, 255, 0.3);
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
             border-radius: 25px;
             padding: 3rem;
             box-shadow: 
                 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(0, 255, 255, 0.2),
-                inset 0 0 60px rgba(138, 43, 226, 0.05);
+                0 0 40px var(--glow-primary),
+                inset 0 0 60px rgba(139, 92, 246, 0.05);
             position: relative;
             overflow: hidden;
             animation: cardEntrance 0.8s ease-out;
+            backdrop-filter: blur(20px);
         }
         
         @keyframes cardEntrance {
@@ -141,7 +172,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
             animation: cardGlow 4s ease-in-out infinite;
             pointer-events: none;
         }
@@ -168,15 +199,15 @@
         .login-logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
             box-shadow: 
-                0 10px 30px rgba(0, 255, 255, 0.3),
-                0 0 40px rgba(138, 43, 226, 0.3);
+                0 10px 30px var(--glow-primary),
+                0 0 40px var(--glow-secondary);
             animation: logoFloat 3s ease-in-out infinite;
             position: relative;
         }
@@ -185,7 +216,7 @@
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, #00ffff, #8a2be2);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
             border-radius: 20px;
             z-index: -1;
             opacity: 0;
@@ -204,7 +235,7 @@
         
         .login-logo i {
             font-size: 3rem;
-            color: #000;
+            color: white;
             animation: iconPulse 2s ease-in-out infinite;
         }
         
@@ -217,7 +248,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(90deg, #00ffff 0%, #ff00ff 50%, #00ffff 100%);
+            background: linear-gradient(90deg, var(--primary-light) 0%, var(--secondary-light) 50%, var(--primary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -232,26 +263,26 @@
         }
         
         .login-subtitle {
-            color: #999;
+            color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 0.5rem;
         }
         
         .login-badge {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(255, 0, 255, 0.3));
-            border: 1px solid rgba(255, 0, 255, 0.5);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3));
+            border: 1px solid var(--secondary);
             padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            color: #ff00ff;
+            color: var(--secondary-light);
             font-weight: 600;
             animation: badgeGlow 2s ease-in-out infinite;
         }
         
         @keyframes badgeGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 255, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.6); }
+            0%, 100% { box-shadow: 0 0 10px var(--glow-secondary); }
+            50% { box-shadow: 0 0 20px var(--glow-secondary); }
         }
         
         /* Form */
@@ -267,7 +298,7 @@
         
         .form-label {
             display: block;
-            color: #00ffff;
+            color: var(--primary-light);
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -284,7 +315,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #00ffff;
+            color: var(--primary-light);
             font-size: 1.2rem;
             transition: all 0.3s;
             z-index: 2;
@@ -293,10 +324,10 @@
         .form-input {
             width: 100%;
             padding: 1rem 1rem 1rem 3rem;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(0, 255, 255, 0.3);
+            background: rgba(10, 1, 24, 0.8);
+            border: 2px solid var(--card-border);
             border-radius: 12px;
-            color: #fff;
+            color: white;
             font-size: 1rem;
             transition: all 0.3s;
             position: relative;
@@ -305,31 +336,31 @@
         
         .form-input:focus {
             outline: none;
-            border-color: #00ffff;
-            background: rgba(0, 0, 0, 0.7);
+            border-color: var(--primary-light);
+            background: rgba(10, 1, 24, 0.95);
             box-shadow: 
-                0 0 20px rgba(0, 255, 255, 0.3),
-                inset 0 0 20px rgba(0, 255, 255, 0.05);
+                0 0 20px var(--glow-primary),
+                inset 0 0 20px rgba(139, 92, 246, 0.05);
             transform: translateY(-2px);
         }
         
         .form-input:focus + .form-input-icon {
-            color: #ff00ff;
+            color: var(--secondary);
             transform: translateY(-50%) scale(1.1);
         }
         
         .form-input::placeholder {
-            color: #666;
+            color: var(--text-muted);
         }
         
         /* Botão Login */
         .btn-login {
             width: 100%;
             padding: 1.2rem;
-            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%);
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
             border: none;
             border-radius: 12px;
-            color: #000;
+            color: white;
             font-size: 1rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -338,7 +369,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
             margin-top: 1rem;
         }
         
@@ -360,8 +391,8 @@
         .btn-login:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 
-                0 15px 40px rgba(0, 255, 255, 0.5),
-                0 0 30px rgba(138, 43, 226, 0.5);
+                0 15px 40px rgba(16, 185, 129, 0.6),
+                0 0 30px rgba(16, 185, 129, 0.5);
         }
         
         .btn-login:active {
@@ -377,27 +408,6 @@
             transform: translateX(5px);
         }
         
-        /* Links */
-        .login-links {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-        }
-        
-        .login-link {
-            color: #00ffff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        
-        .login-link:hover {
-            color: #ff00ff;
-            transform: translateX(3px);
-        }
-        
         /* Footer Info */
         .login-footer {
             text-align: center;
@@ -407,18 +417,8 @@
         }
         
         .login-footer p {
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.85rem;
-        }
-        
-        .login-footer a {
-            color: #00ffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .login-footer a:hover {
-            color: #ff00ff;
         }
         
         /* Loading State */
@@ -432,8 +432,8 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(0,0,0,0.3);
-            border-top-color: #000;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             right: 1rem;
@@ -470,15 +470,15 @@
         }
         
         .alert-error {
-            background: rgba(255, 0, 80, 0.1);
-            border: 1px solid rgba(255, 0, 80, 0.3);
-            color: #ff0050;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
         }
         
         .alert-success {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            color: #00ff88;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success-light);
         }
         
         /* Responsive */
@@ -509,7 +509,7 @@
                 <div class="login-logo">
                     <i class="bi bi-rocket-takeoff"></i>
                 </div>
-                <h1 class="login-title">Projeto Solimões</h1>
+                <h1 class="login-title">UniEja</h1>
                 <p class="login-subtitle">Painel Administrativo</p>
                 <span class="login-badge">UniEja | EJA Ensino Médio e Fundamental</span>
             </div>
@@ -555,17 +555,18 @@
                     <i class="bi bi-arrow-right"></i>
                 </button>
             </form>
+        </div>
+        
         <!-- Footer -->
         <div class="login-footer">
-            <p>© 2025 Projeto Solimões - UniEja. Todos os direitos reservados.</p>
+            <p>© 2025 UniEja - Sistema de Gestão EJA. Todos os direitos reservados.</p>
         </div>
     </div>
     
     <script>
-        const API_URL = 'api.php';
-        const STORAGE_KEY = 'usuarioLogado';
+        const API_URL = 'http://localhost/dashboard/api.php';
         
-        console.log('🔐 Sistema de Login - Projeto Solimões');
+        console.log('🔐 Sistema de Login - UniEja');
         console.log('🔗 API:', API_URL);
         
         const form = document.getElementById('loginForm');
@@ -615,37 +616,21 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, senha })
                 });
-
-                const rawBody = await response.text();
-                let data;
-
-                try {
-                    data = rawBody ? JSON.parse(rawBody) : null;
-                } catch (parseError) {
-                    console.error('Resposta inválida do login:', rawBody);
-                    showAlert('error', '❌ Resposta inválida do servidor!');
-                    return;
-                }
-
-                if (!response.ok) {
-                    const mensagemErro = (data && data.mensagem) ? data.mensagem : 'Falha ao autenticar.';
-                    showAlert('error', `❌ ${mensagemErro}`);
-                    return;
-                }
-
-                if (data && data.sucesso) {
+                
+                const data = await response.json();
+                
+                if (data.sucesso) {
                     showAlert('success', '✅ Login realizado com sucesso!');
-
-                    const payload = JSON.stringify(data.dados);
-                    sessionStorage.setItem(STORAGE_KEY, payload);
-                    localStorage.setItem(STORAGE_KEY, payload);
+                    
+                    // Salvar dados no localStorage
+                    localStorage.setItem('usuario', JSON.stringify(data.dados));
                     
                     // Redirecionar após 1 segundo
                     setTimeout(() => {
                         window.location.href = 'admin.html';
                     }, 1000);
                 } else {
-                    showAlert('error', '❌ ' + ((data && data.mensagem) || 'Email ou senha incorretos!'));
+                    showAlert('error', '❌ ' + (data.mensagem || 'Email ou senha incorretos!'));
                 }
             } catch (error) {
                 console.error('Erro:', error);
@@ -670,7 +655,7 @@
         
         console.log('✅ Sistema de login pronto!');
         console.log('📝 Credenciais de teste:');
-        console.log('   Admin: admin@empresa.com / admin123');
+        console.log('   Admin: admin@empresa.com / admin1223');
     </script>
 </body>
 </html>
